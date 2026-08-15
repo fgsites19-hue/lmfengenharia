@@ -266,8 +266,9 @@ function Home() {
           </h2>
           <div className="mt-12 border-t border-border">
             {faq.map(([q, a]) => (
-              <FaqItem key={q} q={q} a={a} />
+              <FaqItem key={q} q={q!} a={a!} />
             ))}
+
           </div>
         </div>
       </section>
