@@ -208,14 +208,17 @@ function Home() {
           Um método fechado, do primeiro contato à planilha entregue.
         </h2>
         <div className="mt-14 grid gap-10 md:grid-cols-4">
-          {steps.map(([n, t, d]) => (
-            <div key={n} className="border-t border-foreground/80 pt-5">
-              <span className="label-mono text-accent">{n}</span>
-              <h3 className="mt-3 text-lg">{t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</p>
-            </div>
+          {steps.map(([n, t, d], i) => (
+            <Reveal key={n} delay={i * 90}>
+              <div className="border-t border-foreground/80 pt-5">
+                <span className="label-mono text-accent">{n}</span>
+                <h3 className="mt-3 text-lg">{t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
+
       </section>
 
       {/* Projetos */}
