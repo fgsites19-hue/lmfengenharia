@@ -226,9 +226,9 @@ function Home() {
         <div className="mx-auto max-w-6xl px-5 py-24">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <SectionLabel>Projetos</SectionLabel>
+              <SectionLabel>Obras residenciais</SectionLabel>
               <h2 className="mt-6 text-3xl leading-tight md:text-4xl">
-                Obras que passaram pela nossa planilha.
+                Casa Almarias — 2.300 m², Jarinu/SP.
               </h2>
             </div>
             <Link to="/projetos" className="label-mono border-b border-accent pb-1 text-foreground">
@@ -238,9 +238,9 @@ function Home() {
 
           <div className="mt-14 grid gap-8 md:grid-cols-3">
             {[
-              [proj1.url, "Residência em platôs", "Orçamento analítico"],
-              [proj3.url, "Casa térrea integrada", "Revisão de orçamento"],
-              [proj2.url, "Conjunto de pavilhões", "Cronograma físico-financeiro"],
+              [proj1.url, "Implantação em platôs", "Orçamento analítico"],
+              [proj3.url, "Paisagismo estruturado", "Quantitativos"],
+              [proj2.url, "Pavilhões e piscina", "Cronograma físico-financeiro"],
             ].map(([img, name, scope], i) => (
               <Reveal key={name} delay={i * 90}>
                 <article className="group">
