@@ -176,16 +176,28 @@ function Home() {
 
           <div className="mt-14 grid gap-px border border-border bg-border md:grid-cols-3">
             {[
-              ["Orçamento analítico", "Composições, insumos, encargos e BDI item a item."],
-              ["Cronograma físico-financeiro", "Curva S e desembolso mensal alinhados à execução."],
-              ["Controle e auditoria", "Previsto x realizado, medições e revisão de propostas."],
-            ].map(([t, d]) => (
-              <div key={t} className="bg-background p-8">
-                <h3 className="text-xl">{t}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
-              </div>
+              [
+                "Orçamento analítico",
+                "Cada serviço com composição própria: insumos, mão de obra, encargos e BDI abertos, rastreáveis até a prancha do projeto.",
+              ],
+              [
+                "Cronograma físico-financeiro",
+                "Curva S e desembolso mês a mês, para você saber exatamente quanto sai do caixa em cada etapa da obra.",
+              ],
+              [
+                "Controle e auditoria",
+                "Conferência de medições, previsto x realizado e análise crítica de propostas antes de assinar contrato.",
+              ],
+            ].map(([t, d], i) => (
+              <Reveal key={t} delay={i * 90} className="bg-background">
+                <div className="h-full p-8 transition-colors duration-300 hover:bg-secondary">
+                  <h3 className="text-xl">{t}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 
