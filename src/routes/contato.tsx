@@ -61,7 +61,7 @@ function ContatoPage() {
           {[
             ["Resposta", "Até 24 horas úteis"],
             ["Atendimento", "Todo o Brasil, remoto"],
-            ["E-mail", "contato@lmfengenharia.com.br"],
+            ["E-mail", CONTACT_EMAIL],
           ].map(([k, v]) => (
             <li key={k}>
               <p className="label-mono text-muted-foreground">{k}</p>
@@ -69,6 +69,16 @@ function ContatoPage() {
             </li>
           ))}
         </ul>
+
+        <a
+          href={whatsappLink()}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackWhatsAppClick("contato_page")}
+          className="mt-8 inline-block border border-foreground px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-colors hover:bg-foreground hover:text-background"
+        >
+          Chamar no WhatsApp
+        </a>
       </div>
 
       <div className="border border-border bg-card p-8 md:p-10">
@@ -84,6 +94,11 @@ function ContatoPage() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              const data = new FormData(e.currentTarget);
+              trackLeadSubmit({
+                tipo_obra: String(data.get("tipo") ?? ""),
+                tem_area: Boolean(String(data.get("area") ?? "").trim()),
+              });
               setSent(true);
             }}
             className="space-y-6"
