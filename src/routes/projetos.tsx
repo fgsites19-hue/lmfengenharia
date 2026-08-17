@@ -30,36 +30,21 @@ export const Route = createFileRoute("/projetos")({
 });
 
 
-const projects = [
-  {
-    img: proj1.url,
-    name: "Residência em platôs",
-    scope: "Orçamento analítico completo",
-    meta: ["1.480 m²", "Alto padrão", "Área rural"],
-    text: "Implantação em desnível com muros de arrimo, piscina de borda e paisagismo estruturado. Foco do orçamento em terraplenagem e contenções.",
-  },
-  {
-    img: proj2.url,
-    name: "Conjunto de pavilhões",
-    scope: "Quantitativos e cronograma",
-    meta: ["Curva S", "3 blocos", "Fase de projeto"],
-    text: "Distribuição do desembolso em 18 meses com marcos por bloco, permitindo à família programar aportes sem paralisação de obra.",
-  },
-  {
-    img: proj3.url,
-    name: "Casa térrea integrada",
-    scope: "Revisão de orçamento",
-    meta: ["Auditoria", "3 propostas", "Parecer técnico"],
-    text: "Comparativo de propostas de construtoras com identificação de itens omissos em fundação e instalações antes da contratação.",
-  },
-  {
-    img: proj4.url,
-    name: "Residência em condomínio",
-    scope: "Controle de custos na execução",
-    meta: ["Medições", "Previsto x realizado", "24 meses"],
-    text: "Acompanhamento mensal com relatórios gerenciais e conferência de medições ao longo de toda a execução.",
-  },
-];
+const almarias = {
+  name: "Casa Almarias",
+  location: "Jarinu / SP",
+  area: "2.300 m²",
+  category: "Obras Residenciais",
+  scope: "Orçamento analítico e cronograma físico-financeiro",
+  meta: ["2.300 m²", "Jarinu / SP", "Alto padrão", "Implantação em desnível"],
+  text: "Residência de alto padrão implantada em platôs, com muros de arrimo, piscina de borda infinita, pavilhões independentes e paisagismo estruturado. O orçamento concentrou atenção em terraplenagem, contenções e nas interfaces entre os blocos — itens que normalmente ficam subdimensionados em estimativas por metro quadrado.",
+  images: [
+    { src: proj1.url, caption: "Implantação geral em platôs" },
+    { src: proj2.url, caption: "Conjunto de pavilhões e piscina" },
+    { src: proj3.url, caption: "Vista do paisagismo estruturado" },
+    { src: proj4.url, caption: "Fachada e acessos" },
+  ],
+};
 
 function ProjetosPage() {
   return (
@@ -78,37 +63,47 @@ function ProjetosPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <div className="space-y-20">
-          {projects.map((p, i) => (
-            <Reveal key={p.name}>
-              <article
-                className={`grid items-center gap-10 md:grid-cols-2 ${i % 2 === 1 ? "md:[&>figure]:order-2" : ""}`}
-              >
-                <figure className="group overflow-hidden border border-border">
+        <SectionLabel>{almarias.category}</SectionLabel>
+
+        <div className="mt-8 grid gap-10 md:grid-cols-[1.1fr_1fr]">
+          <div>
+            <h2 className="text-3xl leading-tight md:text-4xl">{almarias.name}</h2>
+            <p className="label-mono mt-3 text-accent">
+              {almarias.area} · {almarias.location}
+            </p>
+            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{almarias.text}</p>
+          </div>
+          <dl className="grid grid-cols-2 gap-px self-start border border-border bg-border">
+            {almarias.meta.map((m) => (
+              <dd key={m} className="label-mono bg-background p-5 text-foreground/70">
+                {m}
+              </dd>
+            ))}
+            <dd className="label-mono col-span-2 bg-background p-5 text-foreground/70">
+              {almarias.scope}
+            </dd>
+          </dl>
+        </div>
+
+        <div className="mt-14 grid gap-8 md:grid-cols-2">
+          {almarias.images.map((img, i) => (
+            <Reveal key={img.src} delay={i * 90}>
+              <figure className="group">
+                <div className="overflow-hidden border border-border">
                   <img
-                    src={p.img}
-                    alt={`${p.name} — projeto orçado pela LMF Engenharia`}
+                    src={img.src}
+                    alt={`${almarias.name}, ${almarias.area}, ${almarias.location} — ${img.caption}`}
                     loading="lazy"
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                </figure>
-                <div>
-                  <span className="label-mono text-accent">{p.scope}</span>
-                  <h2 className="mt-4 text-2xl md:text-3xl">{p.name}</h2>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
-                  <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
-                    {p.meta.map((m) => (
-                      <dd key={m} className="label-mono text-foreground/70">
-                        {m}
-                      </dd>
-                    ))}
-                  </dl>
                 </div>
-              </article>
+                <figcaption className="label-mono mt-3 text-muted-foreground">
+                  {img.caption}
+                </figcaption>
+              </figure>
             </Reveal>
           ))}
         </div>
-
       </section>
 
       <CtaBand
