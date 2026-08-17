@@ -80,33 +80,35 @@ function ProjetosPage() {
       <section className="mx-auto max-w-6xl px-5 py-20">
         <div className="space-y-20">
           {projects.map((p, i) => (
-            <article
-              key={p.name}
-              className={`grid items-center gap-10 md:grid-cols-2 ${i % 2 === 1 ? "md:[&>figure]:order-2" : ""}`}
-            >
-              <figure className="overflow-hidden border border-border">
-                <img
-                  src={p.img}
-                  alt={`${p.name} — projeto orçado pela LMF Engenharia`}
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover"
-                />
-              </figure>
-              <div>
-                <span className="label-mono text-accent">{p.scope}</span>
-                <h2 className="mt-4 text-2xl md:text-3xl">{p.name}</h2>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
-                <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
-                  {p.meta.map((m) => (
-                    <dd key={m} className="label-mono text-foreground/70">
-                      {m}
-                    </dd>
-                  ))}
-                </dl>
-              </div>
-            </article>
+            <Reveal key={p.name}>
+              <article
+                className={`grid items-center gap-10 md:grid-cols-2 ${i % 2 === 1 ? "md:[&>figure]:order-2" : ""}`}
+              >
+                <figure className="group overflow-hidden border border-border">
+                  <img
+                    src={p.img}
+                    alt={`${p.name} — projeto orçado pela LMF Engenharia`}
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </figure>
+                <div>
+                  <span className="label-mono text-accent">{p.scope}</span>
+                  <h2 className="mt-4 text-2xl md:text-3xl">{p.name}</h2>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+                  <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
+                    {p.meta.map((m) => (
+                      <dd key={m} className="label-mono text-foreground/70">
+                        {m}
+                      </dd>
+                    ))}
+                  </dl>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
+
       </section>
 
       <CtaBand

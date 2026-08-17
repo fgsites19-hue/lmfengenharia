@@ -105,22 +105,25 @@ function ServicosPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-20">
         <div className="grid gap-px border border-border bg-border md:grid-cols-2">
-          {services.map((s) => (
-            <article key={s.n} className="bg-background p-8 md:p-10">
-              <span className="label-mono text-accent">{s.n}</span>
-              <h2 className="mt-4 text-xl">{s.title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
-              <ul className="mt-6 space-y-2">
-                {s.items.map((i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm text-foreground/80">
-                    <span className="h-1 w-1 shrink-0 bg-accent" />
-                    {i}
-                  </li>
-                ))}
-              </ul>
-            </article>
+          {services.map((s, idx) => (
+            <Reveal key={s.n} delay={(idx % 2) * 90} className="bg-background">
+              <article className="h-full p-8 transition-colors duration-300 hover:bg-secondary md:p-10">
+                <span className="label-mono text-accent">{s.n}</span>
+                <h2 className="mt-4 text-xl">{s.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+                <ul className="mt-6 space-y-2">
+                  {s.items.map((i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm text-foreground/80">
+                      <span className="h-1 w-1 shrink-0 bg-accent" />
+                      {i}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
           ))}
         </div>
+
       </section>
 
       <CtaBand
