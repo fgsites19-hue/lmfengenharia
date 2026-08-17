@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
+import { Reveal } from "@/components/site/Reveal";
+import { SITE_URL } from "@/lib/site";
 import proj1 from "@/assets/proj1.jpeg.asset.json";
 import proj2 from "@/assets/proj2.jpeg.asset.json";
 import proj3 from "@/assets/proj3.jpeg.asset.json";
@@ -12,17 +14,21 @@ export const Route = createFileRoute("/projetos")({
       {
         name: "description",
         content:
-          "Obras residenciais de alto padrão, condomínios e empreendimentos com orçamento analítico, cronograma e controle de custos pela LMF Engenharia.",
+          "Residências de alto padrão, condomínios e empreendimentos orçados pela LMF Engenharia: quantitativos, curva de desembolso, auditoria e controle de custos.",
       },
       { property: "og:title", content: "Projetos Orçados | LMF Engenharia" },
       {
         property: "og:description",
-        content: "Seleção de projetos com orçamento analítico e controle de custos.",
+        content:
+          "Seleção de obras com orçamento analítico, cronograma de desembolso e acompanhamento de custos na execução.",
       },
+      { property: "og:url", content: `${SITE_URL}/projetos` },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/projetos` }],
   }),
   component: ProjetosPage,
 });
+
 
 const projects = [
   {

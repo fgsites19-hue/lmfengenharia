@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
+import { Reveal } from "@/components/site/Reveal";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/servicos")({
   head: () => ({
@@ -8,18 +10,43 @@ export const Route = createFileRoute("/servicos")({
       {
         name: "description",
         content:
-          "Orçamento analítico, quantitativos, composições, cronograma físico-financeiro e revisão de orçamentos para obras residenciais, comerciais e industriais.",
+          "Orçamento analítico, quantitativos, composições de custo, cronograma físico-financeiro, auditoria de propostas e controle de custos na execução da obra.",
       },
       { property: "og:title", content: "Serviços de Orçamento de Obras | LMF Engenharia" },
       {
         property: "og:description",
         content:
-          "Orçamento analítico, quantitativos, cronograma físico-financeiro e controle de custos de obra.",
+          "Do estudo de viabilidade à última medição: orçamento analítico, curva S, auditoria de propostas e controle de custos.",
+      },
+      { property: "og:url", content: `${SITE_URL}/servicos` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/servicos` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Serviços de orçamento de obras — LMF Engenharia",
+          itemListElement: [
+            "Orçamento analítico de obras",
+            "Quantitativos e levantamento",
+            "Cronograma físico-financeiro",
+            "Revisão e auditoria de orçamento",
+            "Controle de custos na execução",
+            "Viabilidade de empreendimentos",
+          ].map((name, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: { "@type": "Service", name, provider: { "@type": "Organization", name: "LMF Engenharia" } },
+          })),
+        }),
       },
     ],
   }),
   component: ServicosPage,
 });
+
 
 const services = [
   {

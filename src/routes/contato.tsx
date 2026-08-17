@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionLabel } from "@/components/site/Section";
+import { SITE_URL, CONTACT_EMAIL, whatsappLink } from "@/lib/site";
+import { trackLeadSubmit, trackWhatsAppClick } from "@/lib/analytics";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -9,17 +11,33 @@ export const Route = createFileRoute("/contato")({
       {
         name: "description",
         content:
-          "Solicite o orçamento da sua obra com a LMF Engenharia. Resposta em até 24 horas úteis com escopo, método e prazo de entrega.",
+          "Solicite o orçamento da sua obra com a LMF Engenharia. Retorno em até 24 horas úteis com escopo, método e prazo de entrega definidos.",
       },
       { property: "og:title", content: "Solicitar Orçamento de Obra | LMF Engenharia" },
       {
         property: "og:description",
-        content: "Resposta em até 24 horas úteis com escopo, método e prazo.",
+        content:
+          "Envie plantas, memorial ou apenas a área estimada. Retorno em até 24 horas úteis com escopo e prazo.",
+      },
+      { property: "og:url", content: `${SITE_URL}/contato` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/contato` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contato — LMF Engenharia",
+          url: `${SITE_URL}/contato`,
+          about: { "@type": "Organization", name: "LMF Engenharia", email: CONTACT_EMAIL },
+        }),
       },
     ],
   }),
   component: ContatoPage,
 });
+
 
 const fieldClass =
   "mt-2 w-full border border-input bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-accent";
