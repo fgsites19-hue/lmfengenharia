@@ -87,6 +87,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Especialistas em orçamento de obras: planilhas analíticas, quantitativos e controle de custos.",
       },
       { name: "author", content: "LMF Engenharia" },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:locale", content: "pt_BR" },
       { property: "og:title", content: "LMF Engenharia | Orçamento de Obras" },
       {
         property: "og:description",
@@ -95,6 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "index, follow" },
     ],
     links: [
       {
@@ -109,6 +112,38 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: SITE_NAME,
+          url: SITE_URL,
+          email: CONTACT_EMAIL,
+          areaServed: "BR",
+          description:
+            "Consultoria de engenharia especializada em orçamento de obras, quantitativos, cronograma físico-financeiro e controle de custos.",
+          knowsAbout: [
+            "Orçamento de obras",
+            "Quantitativos de construção",
+            "Cronograma físico-financeiro",
+            "Controle de custos de obra",
+          ],
+        }),
+      },
+      ...(GA_MEASUREMENT_ID
+        ? [
+            {
+              src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
+              async: true,
+            },
+            {
+              children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`,
+            },
+          ]
+        : []),
+    ],
   }),
 
   shellComponent: RootShell,
@@ -119,7 +154,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
@@ -130,6 +165,7 @@ function RootShell({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
