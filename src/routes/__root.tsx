@@ -13,6 +13,9 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { WhatsAppButton } from "@/components/site/WhatsAppButton";
+import { SITE_NAME, SITE_URL, CONTACT_EMAIL } from "@/lib/site";
+import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 
 
 function NotFoundComponent() {
