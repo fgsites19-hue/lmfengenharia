@@ -241,21 +241,24 @@ function Home() {
               [proj1.url, "Residência em platôs", "Orçamento analítico"],
               [proj3.url, "Casa térrea integrada", "Revisão de orçamento"],
               [proj2.url, "Conjunto de pavilhões", "Cronograma físico-financeiro"],
-            ].map(([img, name, scope]) => (
-              <article key={name} className="group">
-                <div className="overflow-hidden border border-border">
-                  <img
-                    src={img}
-                    alt={`${name} — obra orçada pela LMF Engenharia`}
-                    loading="lazy"
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="mt-5 text-lg">{name}</h3>
-                <p className="label-mono mt-2 text-muted-foreground">{scope}</p>
-              </article>
+            ].map(([img, name, scope], i) => (
+              <Reveal key={name} delay={i * 90}>
+                <article className="group">
+                  <div className="overflow-hidden border border-border">
+                    <img
+                      src={img}
+                      alt={`${name} — obra orçada pela LMF Engenharia`}
+                      loading="lazy"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <h3 className="mt-5 text-lg">{name}</h3>
+                  <p className="label-mono mt-2 text-muted-foreground">{scope}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 
