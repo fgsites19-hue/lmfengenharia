@@ -182,6 +182,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
+        <WhatsAppButton />
       </div>
     </QueryClientProvider>
   );
