@@ -14,6 +14,7 @@ import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProjetosIndexRouteImport } from './routes/projetos.index'
+import { Route as ProjetosSlugRouteImport } from './routes/projetos.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,12 +41,18 @@ const ProjetosIndexRoute = ProjetosIndexRouteImport.update({
   path: '/projetos/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjetosSlugRoute = ProjetosSlugRouteImport.update({
+  id: '/projetos/$slug',
+  path: '/projetos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/projetos/': typeof ProjetosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/projetos': typeof ProjetosIndexRoute
 }
 export interface FileRoutesById {
@@ -61,15 +69,34 @@ export interface FileRoutesById {
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/projetos/': typeof ProjetosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contato' | '/servicos' | '/sitemap.xml' | '/projetos/'
+  fullPaths:
+    | '/'
+    | '/contato'
+    | '/servicos'
+    | '/sitemap.xml'
+    | '/projetos/$slug'
+    | '/projetos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contato' | '/servicos' | '/sitemap.xml' | '/projetos'
+  to:
+    | '/'
+    | '/contato'
+    | '/servicos'
+    | '/sitemap.xml'
+    | '/projetos/$slug'
+    | '/projetos'
   id:
-    '__root__' | '/' | '/contato' | '/servicos' | '/sitemap.xml' | '/projetos/'
+    | '__root__'
+    | '/'
+    | '/contato'
+    | '/servicos'
+    | '/sitemap.xml'
+    | '/projetos/$slug'
+    | '/projetos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +104,7 @@ export interface RootRouteChildren {
   ContatoRoute: typeof ContatoRoute
   ServicosRoute: typeof ServicosRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ProjetosSlugRoute: typeof ProjetosSlugRoute
   ProjetosIndexRoute: typeof ProjetosIndexRoute
 }
 
@@ -117,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjetosIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projetos/$slug': {
+      id: '/projetos/$slug'
+      path: '/projetos/$slug'
+      fullPath: '/projetos/$slug'
+      preLoaderRoute: typeof ProjetosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContatoRoute: ContatoRoute,
   ServicosRoute: ServicosRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ProjetosSlugRoute: ProjetosSlugRoute,
   ProjetosIndexRoute: ProjetosIndexRoute,
 }
 export const routeTree = rootRouteImport
