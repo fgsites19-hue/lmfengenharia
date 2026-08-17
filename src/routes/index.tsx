@@ -9,22 +9,37 @@ import proj3 from "@/assets/proj3.jpeg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LMF Engenharia | Orçamento de Obras com Precisão Técnica" },
+      { title: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
       {
         name: "description",
         content:
-          "Especialistas em orçamento de obras: planilhas analíticas, quantitativos, cronograma físico-financeiro e controle de custos. Saiba quanto sua obra realmente custa.",
+          "Orçamento analítico de obras com memória de cálculo aberta, quantitativos, cronograma físico-financeiro e controle de custos. Retorno em até 24h úteis.",
       },
-      { property: "og:title", content: "LMF Engenharia | Orçamento de Obras" },
+      { property: "og:title", content: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
       {
         property: "og:description",
         content:
-          "Orçamento analítico, cronograma físico-financeiro e controle de custos para obras residenciais, comerciais e industriais.",
+          "Planilhas orçamentárias claras e defensáveis para negociar com construtoras e fornecedores. Atendimento em todo o Brasil.",
+      },
+      { property: "og:url", content: `${SITE_URL}/` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "LMF Engenharia",
+          url: SITE_URL,
+          inLanguage: "pt-BR",
+        }),
       },
     ],
   }),
   component: Home,
 });
+
 
 const steps = [
   ["01", "Diagnóstico", "Entendemos a fase do projeto, o escopo e o nível de detalhe necessário."],
