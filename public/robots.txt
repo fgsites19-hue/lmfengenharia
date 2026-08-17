@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://lmfengenharia.lovable.app/sitemap.xml
