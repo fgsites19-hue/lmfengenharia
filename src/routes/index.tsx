@@ -4,9 +4,9 @@ import { Minus, Plus } from "lucide-react";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { SITE_URL } from "@/lib/site";
-import proj1 from "@/assets/proj1.jpeg.asset.json";
 import proj2 from "@/assets/proj2.jpeg.asset.json";
-import proj3 from "@/assets/proj3.jpeg.asset.json";
+import { projects, coverOf } from "@/data/projects";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
