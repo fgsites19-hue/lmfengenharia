@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
+import { Reveal } from "@/components/site/Reveal";
+import { SITE_URL } from "@/lib/site";
 import proj1 from "@/assets/proj1.jpeg.asset.json";
 import proj2 from "@/assets/proj2.jpeg.asset.json";
 import proj3 from "@/assets/proj3.jpeg.asset.json";
@@ -12,17 +14,21 @@ export const Route = createFileRoute("/projetos")({
       {
         name: "description",
         content:
-          "Obras residenciais de alto padrão, condomínios e empreendimentos com orçamento analítico, cronograma e controle de custos pela LMF Engenharia.",
+          "Residências de alto padrão, condomínios e empreendimentos orçados pela LMF Engenharia: quantitativos, curva de desembolso, auditoria e controle de custos.",
       },
       { property: "og:title", content: "Projetos Orçados | LMF Engenharia" },
       {
         property: "og:description",
-        content: "Seleção de projetos com orçamento analítico e controle de custos.",
+        content:
+          "Seleção de obras com orçamento analítico, cronograma de desembolso e acompanhamento de custos na execução.",
       },
+      { property: "og:url", content: `${SITE_URL}/projetos` },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/projetos` }],
   }),
   component: ProjetosPage,
 });
+
 
 const projects = [
   {
@@ -74,33 +80,35 @@ function ProjetosPage() {
       <section className="mx-auto max-w-6xl px-5 py-20">
         <div className="space-y-20">
           {projects.map((p, i) => (
-            <article
-              key={p.name}
-              className={`grid items-center gap-10 md:grid-cols-2 ${i % 2 === 1 ? "md:[&>figure]:order-2" : ""}`}
-            >
-              <figure className="overflow-hidden border border-border">
-                <img
-                  src={p.img}
-                  alt={`${p.name} — projeto orçado pela LMF Engenharia`}
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover"
-                />
-              </figure>
-              <div>
-                <span className="label-mono text-accent">{p.scope}</span>
-                <h2 className="mt-4 text-2xl md:text-3xl">{p.name}</h2>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
-                <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
-                  {p.meta.map((m) => (
-                    <dd key={m} className="label-mono text-foreground/70">
-                      {m}
-                    </dd>
-                  ))}
-                </dl>
-              </div>
-            </article>
+            <Reveal key={p.name}>
+              <article
+                className={`grid items-center gap-10 md:grid-cols-2 ${i % 2 === 1 ? "md:[&>figure]:order-2" : ""}`}
+              >
+                <figure className="group overflow-hidden border border-border">
+                  <img
+                    src={p.img}
+                    alt={`${p.name} — projeto orçado pela LMF Engenharia`}
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </figure>
+                <div>
+                  <span className="label-mono text-accent">{p.scope}</span>
+                  <h2 className="mt-4 text-2xl md:text-3xl">{p.name}</h2>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+                  <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
+                    {p.meta.map((m) => (
+                      <dd key={m} className="label-mono text-foreground/70">
+                        {m}
+                      </dd>
+                    ))}
+                  </dl>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
+
       </section>
 
       <CtaBand

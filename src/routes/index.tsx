@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
+import { Reveal } from "@/components/site/Reveal";
+import { SITE_URL } from "@/lib/site";
 import proj1 from "@/assets/proj1.jpeg.asset.json";
 import proj2 from "@/assets/proj2.jpeg.asset.json";
 import proj3 from "@/assets/proj3.jpeg.asset.json";
@@ -9,22 +11,37 @@ import proj3 from "@/assets/proj3.jpeg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LMF Engenharia | Orçamento de Obras com Precisão Técnica" },
+      { title: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
       {
         name: "description",
         content:
-          "Especialistas em orçamento de obras: planilhas analíticas, quantitativos, cronograma físico-financeiro e controle de custos. Saiba quanto sua obra realmente custa.",
+          "Orçamento analítico de obras com memória de cálculo aberta, quantitativos, cronograma físico-financeiro e controle de custos. Retorno em até 24h úteis.",
       },
-      { property: "og:title", content: "LMF Engenharia | Orçamento de Obras" },
+      { property: "og:title", content: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
       {
         property: "og:description",
         content:
-          "Orçamento analítico, cronograma físico-financeiro e controle de custos para obras residenciais, comerciais e industriais.",
+          "Planilhas orçamentárias claras e defensáveis para negociar com construtoras e fornecedores. Atendimento em todo o Brasil.",
+      },
+      { property: "og:url", content: `${SITE_URL}/` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "LMF Engenharia",
+          url: SITE_URL,
+          inLanguage: "pt-BR",
+        }),
       },
     ],
   }),
   component: Home,
 });
+
 
 const steps = [
   ["01", "Diagnóstico", "Entendemos a fase do projeto, o escopo e o nível de detalhe necessário."],
@@ -159,16 +176,28 @@ function Home() {
 
           <div className="mt-14 grid gap-px border border-border bg-border md:grid-cols-3">
             {[
-              ["Orçamento analítico", "Composições, insumos, encargos e BDI item a item."],
-              ["Cronograma físico-financeiro", "Curva S e desembolso mensal alinhados à execução."],
-              ["Controle e auditoria", "Previsto x realizado, medições e revisão de propostas."],
-            ].map(([t, d]) => (
-              <div key={t} className="bg-background p-8">
-                <h3 className="text-xl">{t}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
-              </div>
+              [
+                "Orçamento analítico",
+                "Cada serviço com composição própria: insumos, mão de obra, encargos e BDI abertos, rastreáveis até a prancha do projeto.",
+              ],
+              [
+                "Cronograma físico-financeiro",
+                "Curva S e desembolso mês a mês, para você saber exatamente quanto sai do caixa em cada etapa da obra.",
+              ],
+              [
+                "Controle e auditoria",
+                "Conferência de medições, previsto x realizado e análise crítica de propostas antes de assinar contrato.",
+              ],
+            ].map(([t, d], i) => (
+              <Reveal key={t} delay={i * 90} className="bg-background">
+                <div className="h-full p-8 transition-colors duration-300 hover:bg-secondary">
+                  <h3 className="text-xl">{t}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -179,14 +208,17 @@ function Home() {
           Um método fechado, do primeiro contato à planilha entregue.
         </h2>
         <div className="mt-14 grid gap-10 md:grid-cols-4">
-          {steps.map(([n, t, d]) => (
-            <div key={n} className="border-t border-foreground/80 pt-5">
-              <span className="label-mono text-accent">{n}</span>
-              <h3 className="mt-3 text-lg">{t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</p>
-            </div>
+          {steps.map(([n, t, d], i) => (
+            <Reveal key={n} delay={i * 90}>
+              <div className="border-t border-foreground/80 pt-5">
+                <span className="label-mono text-accent">{n}</span>
+                <h3 className="mt-3 text-lg">{t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
+
       </section>
 
       {/* Projetos */}
@@ -209,21 +241,24 @@ function Home() {
               [proj1.url, "Residência em platôs", "Orçamento analítico"],
               [proj3.url, "Casa térrea integrada", "Revisão de orçamento"],
               [proj2.url, "Conjunto de pavilhões", "Cronograma físico-financeiro"],
-            ].map(([img, name, scope]) => (
-              <article key={name} className="group">
-                <div className="overflow-hidden border border-border">
-                  <img
-                    src={img}
-                    alt={`${name} — obra orçada pela LMF Engenharia`}
-                    loading="lazy"
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="mt-5 text-lg">{name}</h3>
-                <p className="label-mono mt-2 text-muted-foreground">{scope}</p>
-              </article>
+            ].map(([img, name, scope], i) => (
+              <Reveal key={name} delay={i * 90}>
+                <article className="group">
+                  <div className="overflow-hidden border border-border">
+                    <img
+                      src={img}
+                      alt={`${name} — obra orçada pela LMF Engenharia`}
+                      loading="lazy"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <h3 className="mt-5 text-lg">{name}</h3>
+                  <p className="label-mono mt-2 text-muted-foreground">{scope}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 
