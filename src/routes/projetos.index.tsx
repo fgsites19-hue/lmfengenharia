@@ -5,7 +5,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { SITE_URL } from "@/lib/site";
 import { projects, usedCategories, coverOf } from "@/data/projects";
 
-export const Route = createFileRoute("/projetos")({
+export const Route = createFileRoute("/projetos/")({
   head: () => ({
     meta: [
       { title: "Projetos Orçados | LMF Engenharia" },
