@@ -226,9 +226,9 @@ function Home() {
         <div className="mx-auto max-w-6xl px-5 py-24">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <SectionLabel>Obras residenciais</SectionLabel>
+              <SectionLabel>Portfólio</SectionLabel>
               <h2 className="mt-6 text-3xl leading-tight md:text-4xl">
-                Casa Almarias — 2.300 m², Jarinu/SP.
+                Obras que passaram pela nossa planilha.
               </h2>
             </div>
             <Link to="/projetos" className="label-mono border-b border-accent pb-1 text-foreground">
@@ -237,27 +237,28 @@ function Home() {
           </div>
 
           <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {[
-              [proj1.url, "Implantação em platôs", "Orçamento analítico"],
-              [proj3.url, "Paisagismo estruturado", "Quantitativos"],
-              [proj2.url, "Pavilhões e piscina", "Cronograma físico-financeiro"],
-            ].map(([img, name, scope], i) => (
-              <Reveal key={name} delay={i * 90}>
-                <article className="group">
+            {projects.slice(0, 3).map((p, i) => (
+              <Reveal key={p.slug} delay={i * 90}>
+                <Link to="/projetos/$slug" params={{ slug: p.slug }} className="group block">
                   <div className="overflow-hidden border border-border">
                     <img
-                      src={img}
-                      alt={`${name} — obra orçada pela LMF Engenharia`}
+                      src={coverOf(p)}
+                      alt={`${p.name}, ${p.area}, ${p.location} — obra orçada pela LMF Engenharia`}
                       loading="lazy"
                       className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="mt-5 text-lg">{name}</h3>
-                  <p className="label-mono mt-2 text-muted-foreground">{scope}</p>
-                </article>
+                  <h3 className="mt-5 text-lg transition-colors group-hover:text-accent">
+                    {p.name}
+                  </h3>
+                  <p className="label-mono mt-2 text-muted-foreground">
+                    {p.area} · {p.location}
+                  </p>
+                </Link>
               </Reveal>
             ))}
           </div>
+
 
         </div>
       </section>
