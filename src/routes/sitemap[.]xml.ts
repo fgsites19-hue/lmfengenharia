@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { SITE_URL } from "@/lib/site";
+import { projects } from "@/data/projects";
+
 
 interface SitemapEntry {
   path: string;
