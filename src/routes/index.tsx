@@ -274,17 +274,18 @@ function Home() {
               Independência técnica é o nosso produto.
             </h2>
             <p className="mt-6 text-muted-foreground">
-              Não vendemos material, não executamos obra e não indicamos fornecedor com
-              comissão. Nosso único compromisso é com a exatidão do número que entregamos —
-              e com a sua capacidade de defendê-lo em qualquer negociação.
+              Não vendemos material, não executamos obra e não intermediamos fornecedor.
+              Essa distância é deliberada: ela é o que permite entregar um número imparcial,
+              auditável e sustentado por método — o mesmo número que você levará para a mesa
+              de negociação com total segurança.
             </p>
           </div>
           <ul className="grid gap-px self-start border border-border bg-border">
             {[
-              ["Responsável técnico", "Engenharia civil registrada, com ART quando aplicável."],
-              ["Transparência total", "Você recebe a planilha editável e a memória de cálculo."],
-              ["Bases atualizadas", "SINAPI, SICRO e cotações de mercado por região."],
-              ["Acompanhamento", "Reunião de entrega e suporte para dúvidas na negociação."],
+              ["Responsável técnico", "Engenharia civil registrada, com ART emitida quando aplicável."],
+              ["Transparência integral", "Planilha editável, composições e memória de cálculo nas suas mãos."],
+              ["Bases regionalizadas", "SINAPI, SICRO e cotações reais de mercado na praça da sua obra."],
+              ["Acompanhamento próximo", "Reunião de entrega e suporte técnico durante toda a negociação."],
             ].map(([t, d]) => (
               <li key={t} className="bg-background p-6">
                 <h3 className="text-base">{t}</h3>
