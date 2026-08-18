@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
+import { Testimonials } from "@/components/site/Testimonials";
 import { Reveal } from "@/components/site/Reveal";
 import { SITE_URL } from "@/lib/site";
 import proj2 from "@/assets/proj2.jpeg.asset.json";
@@ -92,8 +93,9 @@ function Home() {
             Precisa do custo real da sua obra.
           </h1>
           <p className="mt-7 max-w-xl text-base text-ink-foreground/70">
-            A LMF Engenharia transforma projetos em planilhas orçamentárias claras,
-            defensáveis e prontas para negociar com construtoras e fornecedores.
+            Consultoria independente em custos de construção. Transformamos projetos em
+            orçamentos analíticos rastreáveis, com memória de cálculo aberta e o rigor
+            necessário para sustentar cada decisão de investimento.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
@@ -272,17 +274,18 @@ function Home() {
               Independência técnica é o nosso produto.
             </h2>
             <p className="mt-6 text-muted-foreground">
-              Não vendemos material, não executamos obra e não indicamos fornecedor com
-              comissão. Nosso único compromisso é com a exatidão do número que entregamos —
-              e com a sua capacidade de defendê-lo em qualquer negociação.
+              Não vendemos material, não executamos obra e não intermediamos fornecedor.
+              Essa distância é deliberada: ela é o que permite entregar um número imparcial,
+              auditável e sustentado por método — o mesmo número que você levará para a mesa
+              de negociação com total segurança.
             </p>
           </div>
           <ul className="grid gap-px self-start border border-border bg-border">
             {[
-              ["Responsável técnico", "Engenharia civil registrada, com ART quando aplicável."],
-              ["Transparência total", "Você recebe a planilha editável e a memória de cálculo."],
-              ["Bases atualizadas", "SINAPI, SICRO e cotações de mercado por região."],
-              ["Acompanhamento", "Reunião de entrega e suporte para dúvidas na negociação."],
+              ["Responsável técnico", "Engenharia civil registrada, com ART emitida quando aplicável."],
+              ["Transparência integral", "Planilha editável, composições e memória de cálculo nas suas mãos."],
+              ["Bases regionalizadas", "SINAPI, SICRO e cotações reais de mercado na praça da sua obra."],
+              ["Acompanhamento próximo", "Reunião de entrega e suporte técnico durante toda a negociação."],
             ].map(([t, d]) => (
               <li key={t} className="bg-background p-6">
                 <h3 className="text-base">{t}</h3>
@@ -292,6 +295,9 @@ function Home() {
           </ul>
         </div>
       </section>
+
+      <Testimonials />
+
 
       {/* FAQ */}
       <section className="border-t border-border">
