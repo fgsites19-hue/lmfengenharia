@@ -294,6 +294,9 @@ function Home() {
         </div>
       </section>
 
+      <Testimonials />
+
+
       {/* FAQ */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-4xl px-5 py-24">
