@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
+import { Testimonials } from "@/components/site/Testimonials";
 import { Reveal } from "@/components/site/Reveal";
 import { SITE_URL } from "@/lib/site";
 import proj2 from "@/assets/proj2.jpeg.asset.json";
