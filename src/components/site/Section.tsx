@@ -19,7 +19,7 @@ export function CtaBand({
 }) {
   return (
     <section className="bg-ink text-ink-foreground">
-      <div className="mx-auto grid max-w-6xl gap-8 px-5 py-20 md:grid-cols-[1.3fr_1fr] md:items-end">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.3fr_1fr] md:items-end">
         <div>
           <SectionLabel>Próximo passo</SectionLabel>
           <h2 className="mt-5 text-3xl leading-tight md:text-4xl">{title}</h2>

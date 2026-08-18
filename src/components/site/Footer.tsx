@@ -4,7 +4,7 @@ import logo from "@/assets/logo.jpeg.asset.json";
 export function Footer() {
   return (
     <footer className="border-t border-border bg-ink text-ink-foreground">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 sm:py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
             <img src={logo.url} alt="LMF Engenharia" className="h-10 w-10 object-cover" />
@@ -37,7 +37,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-ink-foreground/10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-xs text-ink-foreground/45 md:flex-row md:items-center md:justify-between">
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 sm:px-6 text-xs text-ink-foreground/45 md:flex-row md:items-center md:justify-between">
           <span>© {new Date().getFullYear()} LMF Engenharia. Todos os direitos reservados.</span>
           <span className="label-mono">Orçamento · Custos · Previsibilidade</span>
         </div>

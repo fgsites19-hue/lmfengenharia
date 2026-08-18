@@ -35,7 +35,7 @@ export const testimonials: Testimonial[] = [
 export function Testimonials() {
   return (
     <section className="border-t border-border bg-secondary">
-      <div className="mx-auto max-w-6xl px-5 py-24">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
         <div className="max-w-2xl">
           <SectionLabel>Depoimentos</SectionLabel>
           <h2 className="mt-6 text-3xl leading-tight md:text-4xl">

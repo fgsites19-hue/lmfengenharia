@@ -85,7 +85,7 @@ function Home() {
           className="absolute inset-0 h-full w-full object-cover opacity-25"
         />
         <div className="absolute inset-0 grid-lines opacity-40" />
-        <div className="relative mx-auto max-w-6xl px-5 py-28 md:py-36">
+        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 md:py-36">
           <SectionLabel>Orçamento de obras</SectionLabel>
           <h1 className="mt-7 max-w-4xl text-4xl leading-[1.03] md:text-7xl">
             Você não precisa de um palpite.
@@ -129,7 +129,7 @@ function Home() {
       </section>
 
       {/* Problema / posicionamento */}
-      <section className="mx-auto max-w-6xl px-5 py-24">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
         <div className="grid gap-14 md:grid-cols-[1fr_1.2fr]">
           <div>
             <SectionLabel>O problema</SectionLabel>
@@ -163,7 +163,7 @@ function Home() {
 
       {/* Serviços resumo */}
       <section className="border-y border-border bg-secondary">
-        <div className="mx-auto max-w-6xl px-5 py-24">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <SectionLabel>Serviços</SectionLabel>
@@ -204,7 +204,7 @@ function Home() {
       </section>
 
       {/* Processo */}
-      <section className="mx-auto max-w-6xl px-5 py-24">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
         <SectionLabel>Como trabalhamos</SectionLabel>
         <h2 className="mt-6 max-w-2xl text-3xl leading-tight md:text-4xl">
           Um método fechado, do primeiro contato à planilha entregue.
@@ -225,7 +225,7 @@ function Home() {
 
       {/* Projetos */}
       <section className="border-t border-border bg-secondary">
-        <div className="mx-auto max-w-6xl px-5 py-24">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <SectionLabel>Portfólio</SectionLabel>
@@ -266,7 +266,7 @@ function Home() {
       </section>
 
       {/* Autoridade */}
-      <section className="mx-auto max-w-6xl px-5 py-24">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
         <div className="grid gap-14 md:grid-cols-2">
           <div>
             <SectionLabel>Por que a LMF</SectionLabel>
@@ -301,7 +301,7 @@ function Home() {
 
       {/* FAQ */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-4xl px-5 py-24">
+        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
           <SectionLabel>Dúvidas frequentes</SectionLabel>
           <h2 className="mt-6 text-3xl leading-tight md:text-4xl">
             O que perguntam antes de contratar.

@@ -38,7 +38,7 @@ function ProjetosPage() {
   return (
     <>
       <section className="border-b border-border bg-secondary">
-        <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <SectionLabel>Projetos</SectionLabel>
           <h1 className="mt-6 max-w-3xl text-4xl leading-[1.05] md:text-6xl">
             Projetos que passaram pela nossa planilha antes do canteiro.
@@ -50,7 +50,7 @@ function ProjetosPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         {cats.length > 1 && (
           <div className="flex flex-wrap gap-2">
             {["Todos", ...cats].map((c) => (

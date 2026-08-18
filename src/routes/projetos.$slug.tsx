@@ -40,7 +40,7 @@ function ProjetoPage() {
   return (
     <>
       <section className="border-b border-border bg-secondary">
-        <div className="mx-auto max-w-6xl px-5 py-16">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
           <Link
             to="/projetos"
             className="label-mono inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
@@ -55,7 +55,7 @@ function ProjetoPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="grid gap-10 md:grid-cols-[1.1fr_1fr]">
           <p className="text-sm leading-relaxed text-muted-foreground">{p.text}</p>
           <dl className="grid grid-cols-2 gap-px self-start border border-border bg-border">

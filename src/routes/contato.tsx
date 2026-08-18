@@ -46,7 +46,7 @@ function ContatoPage() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section className="mx-auto grid max-w-6xl gap-16 px-5 py-20 md:grid-cols-[1fr_1.1fr]">
+    <section className="mx-auto grid max-w-6xl gap-16 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-[1fr_1.1fr]">
       <div>
         <SectionLabel>Contato</SectionLabel>
         <h1 className="mt-6 text-4xl leading-[1.05] md:text-5xl">
