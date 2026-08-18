@@ -35,10 +35,10 @@ export const testimonials: Testimonial[] = [
 export function Testimonials() {
   return (
     <section className="border-t border-border bg-secondary">
-      <div className="mx-auto max-w-6xl px-5 py-24">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
         <div className="max-w-2xl">
           <SectionLabel>Depoimentos</SectionLabel>
-          <h2 className="mt-6 text-3xl leading-tight md:text-4xl">
+          <h2 className="mt-5 text-2xl leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
             A confiança vem do número — e de quem precisou defendê-lo.
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
@@ -47,10 +47,10 @@ export function Testimonials() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-px border border-border bg-border md:grid-cols-3">
+        <div className="mt-10 grid gap-px border border-border bg-border sm:mt-14 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 90} className="bg-background">
-              <figure className="flex h-full flex-col justify-between p-8 transition-colors duration-300 hover:bg-secondary">
+              <figure className="flex h-full flex-col justify-between p-6 sm:p-8 transition-colors duration-300 hover:bg-secondary">
                 <span aria-hidden className="font-display text-4xl leading-none text-accent">
                   &ldquo;
                 </span>

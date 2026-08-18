@@ -40,24 +40,24 @@ export const Route = createFileRoute("/contato")({
 
 
 const fieldClass =
-  "mt-2 w-full border border-input bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-accent";
+  "mt-2 w-full border border-input bg-background px-4 py-3 text-base outline-none transition-colors focus:border-accent sm:text-sm";
 
 function ContatoPage() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section className="mx-auto grid max-w-6xl gap-16 px-5 py-20 md:grid-cols-[1fr_1.1fr]">
+    <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-[1fr_1.1fr] md:gap-16">
       <div>
         <SectionLabel>Contato</SectionLabel>
-        <h1 className="mt-6 text-4xl leading-[1.05] md:text-5xl">
+        <h1 className="mt-5 text-[2rem] leading-[1.1] sm:mt-6 sm:text-4xl sm:leading-[1.05] md:text-5xl">
           Solicite o orçamento da sua obra.
         </h1>
-        <p className="mt-6 text-muted-foreground">
+        <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base">
           Quanto mais informação você enviar, mais preciso é o nosso retorno. Se ainda não
           tiver projeto, tudo bem — trabalhamos também com estimativa preliminar por área.
         </p>
 
-        <ul className="mt-10 space-y-6 border-t border-border pt-8">
+        <ul className="mt-8 space-y-5 border-t border-border pt-6 sm:mt-10 sm:space-y-6 sm:pt-8">
           {[
             ["Resposta", "Até 24 horas úteis"],
             ["Atendimento", "Todo o Brasil, remoto"],
@@ -75,13 +75,13 @@ function ContatoPage() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackWhatsAppClick("contato_page")}
-          className="mt-8 inline-block border border-foreground px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-colors hover:bg-foreground hover:text-background"
+          className="mt-8 inline-block w-full border border-foreground px-6 py-3 text-center sm:w-auto sm:text-left text-xs font-semibold uppercase tracking-widest transition-colors hover:bg-foreground hover:text-background"
         >
           Chamar no WhatsApp
         </a>
       </div>
 
-      <div className="border border-border bg-card p-8 md:p-10">
+      <div className="border border-border bg-card p-6 sm:p-8 md:p-10">
         {sent ? (
           <div className="py-16 text-center">
             <p className="label-mono text-accent">Solicitação registrada</p>

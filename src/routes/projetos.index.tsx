@@ -38,26 +38,26 @@ function ProjetosPage() {
   return (
     <>
       <section className="border-b border-border bg-secondary">
-        <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <SectionLabel>Projetos</SectionLabel>
-          <h1 className="mt-6 max-w-3xl text-4xl leading-[1.05] md:text-6xl">
+          <h1 className="mt-5 max-w-3xl text-[2rem] leading-[1.1] sm:mt-6 sm:text-5xl sm:leading-[1.05] md:text-6xl">
             Projetos que passaram pela nossa planilha antes do canteiro.
           </h1>
-          <p className="mt-6 max-w-2xl text-muted-foreground">
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base">
             Uma seleção de obras em que atuamos no orçamento, no planejamento de desembolso
             ou no controle de custos durante a execução.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         {cats.length > 1 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
             {["Todos", ...cats].map((c) => (
               <button
                 key={c}
                 onClick={() => setFilter(c)}
-                className={`label-mono border px-4 py-2 transition-colors ${
+                className={`label-mono shrink-0 border px-4 py-2 transition-colors ${
                   filter === c
                     ? "border-accent bg-accent text-accent-foreground"
                     : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
@@ -69,7 +69,7 @@ function ProjetosPage() {
           </div>
         )}
 
-        <div className="mt-12 grid gap-10 md:grid-cols-2">
+        <div className="mt-10 grid gap-8 sm:mt-12 sm:gap-10 md:grid-cols-2">
           {list.map((p, i) => (
             <Reveal key={p.slug} delay={i * 80}>
               <Link to="/projetos/$slug" params={{ slug: p.slug }} className="group block">
@@ -82,7 +82,7 @@ function ProjetosPage() {
                   />
                 </div>
                 <p className="label-mono mt-5 text-accent">{p.category}</p>
-                <h2 className="mt-2 text-2xl transition-colors group-hover:text-accent">{p.name}</h2>
+                <h2 className="mt-2 text-xl transition-colors group-hover:text-accent sm:text-2xl">{p.name}</h2>
                 <p className="label-mono mt-2 text-muted-foreground">
                   {p.area} · {p.location}
                 </p>
