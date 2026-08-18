@@ -93,8 +93,9 @@ function Home() {
             Precisa do custo real da sua obra.
           </h1>
           <p className="mt-7 max-w-xl text-base text-ink-foreground/70">
-            A LMF Engenharia transforma projetos em planilhas orçamentárias claras,
-            defensáveis e prontas para negociar com construtoras e fornecedores.
+            Consultoria independente em custos de construção. Transformamos projetos em
+            orçamentos analíticos rastreáveis, com memória de cálculo aberta e o rigor
+            necessário para sustentar cada decisão de investimento.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
