@@ -93,10 +93,10 @@ function ServicosPage() {
       <section className="border-b border-border bg-secondary">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <SectionLabel>Serviços</SectionLabel>
-          <h1 className="mt-6 max-w-3xl text-4xl leading-[1.05] md:text-6xl">
+          <h1 className="mt-5 max-w-3xl text-[2rem] leading-[1.1] sm:mt-6 sm:text-5xl sm:leading-[1.05] md:text-6xl">
             Cada número da sua obra com origem, método e responsável técnico.
           </h1>
-          <p className="mt-6 max-w-2xl text-muted-foreground">
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base">
             Trabalhamos exclusivamente com custos de construção. Isso significa profundidade
             em levantamento, composição e controle — sem conflito de interesse com a execução.
           </p>
@@ -107,9 +107,9 @@ function ServicosPage() {
         <div className="grid gap-px border border-border bg-border md:grid-cols-2">
           {services.map((s, idx) => (
             <Reveal key={s.n} delay={(idx % 2) * 90} className="bg-background">
-              <article className="h-full p-8 transition-colors duration-300 hover:bg-secondary md:p-10">
+              <article className="h-full p-6 transition-colors duration-300 hover:bg-secondary sm:p-8 md:p-10">
                 <span className="label-mono text-accent">{s.n}</span>
-                <h2 className="mt-4 text-xl">{s.title}</h2>
+                <h2 className="mt-4 text-lg sm:text-xl">{s.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
                 <ul className="mt-6 space-y-2">
                   {s.items.map((i) => (

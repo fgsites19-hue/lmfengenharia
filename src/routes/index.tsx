@@ -87,40 +87,40 @@ function Home() {
         <div className="absolute inset-0 grid-lines opacity-40" />
         <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 md:py-36">
           <SectionLabel>Orçamento de obras</SectionLabel>
-          <h1 className="mt-7 max-w-4xl text-4xl leading-[1.03] md:text-7xl">
+          <h1 className="mt-6 max-w-4xl text-[2rem] leading-[1.08] sm:mt-7 sm:text-5xl sm:leading-[1.03] md:text-7xl">
             Você não precisa de um palpite.
             <br />
             Precisa do custo real da sua obra.
           </h1>
-          <p className="mt-7 max-w-xl text-base text-ink-foreground/70">
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-foreground/70 sm:mt-7 sm:text-base">
             Consultoria independente em custos de construção. Transformamos projetos em
             orçamentos analíticos rastreáveis, com memória de cálculo aberta e o rigor
             necessário para sustentar cada decisão de investimento.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
             <Link
               to="/contato"
-              className="bg-accent px-7 py-4 text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
+              className="bg-accent px-7 py-4 text-center text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
             >
               Solicitar orçamento
             </Link>
             <Link
               to="/servicos"
-              className="border border-ink-foreground/30 px-7 py-4 text-xs font-semibold uppercase tracking-widest text-ink-foreground transition-colors hover:border-ink-foreground"
+              className="border border-ink-foreground/30 px-7 py-4 text-center text-xs font-semibold uppercase tracking-widest text-ink-foreground transition-colors hover:border-ink-foreground"
             >
               Ver serviços
             </Link>
           </div>
 
-          <dl className="mt-20 grid max-w-3xl grid-cols-2 gap-px border border-ink-foreground/15 bg-ink-foreground/15 sm:grid-cols-4">
+          <dl className="mt-14 grid max-w-3xl grid-cols-2 gap-px border border-ink-foreground/15 bg-ink-foreground/15 sm:mt-20 sm:grid-cols-4">
             {[
               ["+120", "obras orçadas"],
               ["24h", "para retorno"],
               ["100%", "memória de cálculo aberta"],
               ["0", "obras executadas por nós"],
             ].map(([v, k]) => (
-              <div key={k} className="bg-ink p-5">
-                <dt className="font-display text-2xl">{v}</dt>
+              <div key={k} className="bg-ink p-4 sm:p-5">
+                <dt className="font-display text-xl sm:text-2xl">{v}</dt>
                 <dd className="label-mono mt-2 text-ink-foreground/50">{k}</dd>
               </div>
             ))}
@@ -130,14 +130,14 @@ function Home() {
 
       {/* Problema / posicionamento */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
-        <div className="grid gap-14 md:grid-cols-[1fr_1.2fr]">
+        <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:gap-14">
           <div>
             <SectionLabel>O problema</SectionLabel>
-            <h2 className="mt-6 text-3xl leading-tight md:text-4xl">
+            <h2 className="mt-5 text-2xl leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
               A maior parte das obras estoura porque começou sem número confiável.
             </h2>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {[
               [
                 "Estimativa por m² não é orçamento",
@@ -152,7 +152,7 @@ function Home() {
                 "Saber o total não basta. O que trava a obra é não saber quanto sai do caixa em cada mês.",
               ],
             ].map(([t, d]) => (
-              <div key={t} className="border-l-2 border-accent pl-6">
+              <div key={t} className="border-l-2 border-accent pl-5 sm:pl-6">
                 <h3 className="text-lg">{t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</p>
               </div>
@@ -164,10 +164,10 @@ function Home() {
       {/* Serviços resumo */}
       <section className="border-y border-border bg-secondary">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
-          <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-6">
             <div>
               <SectionLabel>Serviços</SectionLabel>
-              <h2 className="mt-6 max-w-2xl text-3xl leading-tight md:text-4xl">
+              <h2 className="mt-5 max-w-2xl text-2xl leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
                 Especialização em custos, do estudo preliminar à última medição.
               </h2>
             </div>
@@ -176,7 +176,7 @@ function Home() {
             </Link>
           </div>
 
-          <div className="mt-14 grid gap-px border border-border bg-border md:grid-cols-3">
+          <div className="mt-10 grid gap-px border border-border bg-border sm:mt-14 md:grid-cols-3">
             {[
               [
                 "Orçamento analítico",
@@ -192,7 +192,7 @@ function Home() {
               ],
             ].map(([t, d], i) => (
               <Reveal key={t} delay={i * 90} className="bg-background">
-                <div className="h-full p-8 transition-colors duration-300 hover:bg-secondary">
+                <div className="h-full p-6 transition-colors duration-300 hover:bg-secondary sm:p-8">
                   <h3 className="text-xl">{t}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
                 </div>
@@ -206,10 +206,10 @@ function Home() {
       {/* Processo */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
         <SectionLabel>Como trabalhamos</SectionLabel>
-        <h2 className="mt-6 max-w-2xl text-3xl leading-tight md:text-4xl">
+        <h2 className="mt-5 max-w-2xl text-2xl leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
           Um método fechado, do primeiro contato à planilha entregue.
         </h2>
-        <div className="mt-14 grid gap-10 md:grid-cols-4">
+        <div className="mt-10 grid gap-8 sm:mt-14 sm:grid-cols-2 sm:gap-10 md:grid-cols-4">
           {steps.map(([n, t, d], i) => (
             <Reveal key={n} delay={i * 90}>
               <div className="border-t border-foreground/80 pt-5">
@@ -226,10 +226,10 @@ function Home() {
       {/* Projetos */}
       <section className="border-t border-border bg-secondary">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
-          <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-6">
             <div>
               <SectionLabel>Portfólio</SectionLabel>
-              <h2 className="mt-6 text-3xl leading-tight md:text-4xl">
+              <h2 className="mt-5 text-2xl leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
                 Obras que passaram pela nossa planilha.
               </h2>
             </div>
@@ -238,7 +238,7 @@ function Home() {
             </Link>
           </div>
 
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
+          <div className="mt-10 grid gap-8 sm:mt-14 sm:grid-cols-2 md:grid-cols-3">
             {projects.slice(0, 3).map((p, i) => (
               <Reveal key={p.slug} delay={i * 90}>
                 <Link to="/projetos/$slug" params={{ slug: p.slug }} className="group block">
@@ -267,10 +267,10 @@ function Home() {
 
       {/* Autoridade */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
-        <div className="grid gap-14 md:grid-cols-2">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-14">
           <div>
             <SectionLabel>Por que a LMF</SectionLabel>
-            <h2 className="mt-6 text-3xl leading-tight md:text-4xl">
+            <h2 className="mt-5 text-2xl leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
               Independência técnica é o nosso produto.
             </h2>
             <p className="mt-6 text-muted-foreground">
@@ -287,7 +287,7 @@ function Home() {
               ["Bases regionalizadas", "SINAPI, SICRO e cotações reais de mercado na praça da sua obra."],
               ["Acompanhamento próximo", "Reunião de entrega e suporte técnico durante toda a negociação."],
             ].map(([t, d]) => (
-              <li key={t} className="bg-background p-6">
+              <li key={t} className="bg-background p-5 sm:p-6">
                 <h3 className="text-base">{t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{d}</p>
               </li>
@@ -303,7 +303,7 @@ function Home() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
           <SectionLabel>Dúvidas frequentes</SectionLabel>
-          <h2 className="mt-6 text-3xl leading-tight md:text-4xl">
+          <h2 className="mt-5 text-2xl leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
             O que perguntam antes de contratar.
           </h2>
           <div className="mt-12 border-t border-border">
@@ -326,10 +326,10 @@ function FaqItem({ q, a }: { q: string; a: string }) {
     <div className="border-b border-border">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-6 py-6 text-left"
+        className="flex w-full items-center justify-between gap-4 py-5 text-left sm:gap-6 sm:py-6"
         aria-expanded={open}
       >
-        <span className="font-display text-lg">{q}</span>
+        <span className="font-display text-base sm:text-lg">{q}</span>
         {open ? (
           <Minus className="size-4 shrink-0 text-accent" />
         ) : (
