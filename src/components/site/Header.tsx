@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo.jpeg.asset.json";
 
 const nav = [
   { to: "/", label: "Início" },
@@ -17,7 +16,7 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <img src={logo.url} alt="LMF Engenharia" className="h-9 w-9 object-cover mix-blend-multiply" />
+          <img src="/images/logo.png" alt="LMF Engenharia" className="h-9 w-9 object-contain" />
           <span className="label-mono text-foreground">LMF Engenharia</span>
         </Link>
 

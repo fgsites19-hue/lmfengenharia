@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import { whatsappLink } from "@/lib/site";
 
 export function SectionLabel({ children }: { children: ReactNode }) {
   return (
@@ -12,7 +12,7 @@ export function SectionLabel({ children }: { children: ReactNode }) {
 
 export function CtaBand({
   title = "Quer saber quanto realmente custa a sua obra?",
-  text = "Envie o projeto ou o escopo. Retornamos com prazo, método e valor do orçamento em até 24 horas úteis.",
+  text = "Envie o projeto ou o escopo pelo WhatsApp. Retornamos com o método e o valor do orçamento.",
 }: {
   title?: string;
   text?: string;
@@ -26,12 +26,14 @@ export function CtaBand({
           <p className="mt-4 max-w-xl text-sm text-ink-foreground/60">{text}</p>
         </div>
         <div className="md:justify-self-end">
-          <Link
-            to="/contato"
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center bg-accent px-7 py-4 sm:w-auto text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
           >
             Solicitar orçamento
-          </Link>
+          </a>
         </div>
       </div>
     </section>

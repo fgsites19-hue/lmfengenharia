@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.jpeg.asset.json";
+import { CONTACT_EMAIL, INSTAGRAM_URL, whatsappLink } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:gap-10 sm:px-6 sm:py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            <img src={logo.url} alt="LMF Engenharia" className="h-10 w-10 object-cover" />
+            <img src="/images/logo.png" alt="LMF Engenharia" className="h-10 w-10 object-contain" />
             <span className="label-mono">LMF Engenharia</span>
           </div>
           <p className="mt-5 max-w-sm text-sm text-ink-foreground/60">
@@ -29,9 +29,22 @@ export function Footer() {
         <div>
           <p className="label-mono text-ink-foreground/50">Contato</p>
           <ul className="mt-4 space-y-2 text-sm text-ink-foreground/70">
-            <li>contato@lmfengenharia.com.br</li>
+            <li>
+              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hover:text-ink-foreground">
+                WhatsApp
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-ink-foreground">
+                {CONTACT_EMAIL}
+              </a>
+            </li>
+            <li>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-ink-foreground">
+                Instagram
+              </a>
+            </li>
             <li>Atendimento em todo o Brasil</li>
-            <li>Seg a sex, 8h às 18h</li>
           </ul>
         </div>
       </div>

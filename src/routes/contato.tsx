@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionLabel } from "@/components/site/Section";
 import { SITE_URL, CONTACT_EMAIL, whatsappLink } from "@/lib/site";
+
 import { trackLeadSubmit, trackWhatsAppClick } from "@/lib/analytics";
 
 export const Route = createFileRoute("/contato")({
@@ -11,13 +12,12 @@ export const Route = createFileRoute("/contato")({
       {
         name: "description",
         content:
-          "Solicite o orçamento da sua obra com a LMF Engenharia. Retorno em até 24 horas úteis com escopo, método e prazo de entrega definidos.",
+          "Solicite o orçamento da sua obra com a LMF Engenharia. Conte o escopo do projeto e receba o método e o prazo do orçamento.",
       },
       { property: "og:title", content: "Solicitar Orçamento de Obra | LMF Engenharia" },
       {
         property: "og:description",
-        content:
-          "Envie plantas, memorial ou apenas a área estimada. Retorno em até 24 horas úteis com escopo e prazo.",
+        content: "Envie plantas, memorial ou apenas a área estimada. Retornamos com escopo e prazo.",
       },
       { property: "og:url", content: `${SITE_URL}/contato` },
     ],
@@ -59,7 +59,6 @@ function ContatoPage() {
 
         <ul className="mt-8 space-y-5 border-t border-border pt-6 sm:mt-10 sm:space-y-6 sm:pt-8">
           {[
-            ["Resposta", "Até 24 horas úteis"],
             ["Atendimento", "Todo o Brasil, remoto"],
             ["E-mail", CONTACT_EMAIL],
           ].map(([k, v]) => (
@@ -84,10 +83,10 @@ function ContatoPage() {
       <div className="border border-border bg-card p-6 sm:p-8 md:p-10">
         {sent ? (
           <div className="py-16 text-center">
-            <p className="label-mono text-accent">Solicitação registrada</p>
-            <h2 className="mt-4 text-2xl">Obrigado pelo contato.</h2>
+            <p className="label-mono text-accent">Quase lá</p>
+            <h2 className="mt-4 text-2xl">Abrimos o WhatsApp para você.</h2>
             <p className="mt-3 text-sm text-muted-foreground">
-              Retornamos em até 24 horas úteis com o escopo e o prazo do orçamento.
+              Confira a mensagem preenchida e envie por lá para concluir a solicitação.
             </p>
           </div>
         ) : (
@@ -95,10 +94,25 @@ function ContatoPage() {
             onSubmit={(e) => {
               e.preventDefault();
               const data = new FormData(e.currentTarget);
-              trackLeadSubmit({
-                tipo_obra: String(data.get("tipo") ?? ""),
-                tem_area: Boolean(String(data.get("area") ?? "").trim()),
-              });
+              const nome = String(data.get("nome") ?? "");
+              const email = String(data.get("email") ?? "");
+              const tel = String(data.get("tel") ?? "");
+              const tipo = String(data.get("tipo") ?? "");
+              const area = String(data.get("area") ?? "");
+              const msg = String(data.get("msg") ?? "");
+              trackLeadSubmit({ tipo_obra: tipo, tem_area: Boolean(area.trim()) });
+
+              const lines = [
+                "Olá! Gostaria de solicitar um orçamento de obra com a LMF Engenharia.",
+                `Nome: ${nome}`,
+                email && `E-mail: ${email}`,
+                tel && `Telefone: ${tel}`,
+                `Tipo de obra: ${tipo}`,
+                area && `Área aproximada: ${area} m²`,
+                msg && `Sobre o projeto: ${msg}`,
+              ].filter(Boolean);
+
+              window.open(whatsappLink(lines.join("\n")), "_blank", "noopener,noreferrer");
               setSent(true);
             }}
             className="space-y-6"

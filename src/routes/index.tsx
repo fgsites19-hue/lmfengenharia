@@ -2,10 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
-import { Testimonials } from "@/components/site/Testimonials";
 import { Reveal } from "@/components/site/Reveal";
-import { SITE_URL } from "@/lib/site";
-import proj2 from "@/assets/proj2.jpeg.asset.json";
+import { SITE_URL, whatsappLink } from "@/lib/site";
 import { projects, coverOf } from "@/data/projects";
 
 
@@ -16,7 +14,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Orçamento analítico de obras com memória de cálculo aberta, quantitativos, cronograma físico-financeiro e controle de custos. Retorno em até 24h úteis.",
+          "Orçamento analítico de obras com memória de cálculo aberta, quantitativos, cronograma físico-financeiro e controle de custos.",
       },
       { property: "og:title", content: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
       {
@@ -62,7 +60,7 @@ const faq = [
   ],
   [
     "Qual o prazo de entrega?",
-    "Depende do porte e do nível de detalhe. Obras residenciais costumam ficar entre 7 e 15 dias úteis, com prazo confirmado antes do início.",
+    "Depende do porte e do nível de detalhe do projeto. O prazo é confirmado com você antes do início do orçamento.",
   ],
   [
     "O que vem na entrega?",
@@ -80,8 +78,8 @@ function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border bg-ink text-ink-foreground">
         <img
-          src={proj2.url}
-          alt="Empreendimento residencial de alto padrão orçado pela LMF Engenharia"
+          src="/images/hero-mansao-floresta.jpg"
+          alt="Residência de alto padrão orçada pela LMF Engenharia"
           className="absolute inset-0 h-full w-full object-cover opacity-25"
         />
         <div className="absolute inset-0 grid-lines opacity-40" />
@@ -98,12 +96,14 @@ function Home() {
             necessário para sustentar cada decisão de investimento.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
-            <Link
-              to="/contato"
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-accent px-7 py-4 text-center text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
             >
               Solicitar orçamento
-            </Link>
+            </a>
             <Link
               to="/servicos"
               className="border border-ink-foreground/30 px-7 py-4 text-center text-xs font-semibold uppercase tracking-widest text-ink-foreground transition-colors hover:border-ink-foreground"
@@ -114,8 +114,8 @@ function Home() {
 
           <dl className="mt-14 grid max-w-3xl grid-cols-2 gap-px border border-ink-foreground/15 bg-ink-foreground/15 sm:mt-20 sm:grid-cols-4">
             {[
-              ["+120", "obras orçadas"],
-              ["24h", "para retorno"],
+              ["5+", "anos de experiência"],
+              ["4", "tipologias orçadas"],
               ["100%", "memória de cálculo aberta"],
               ["0", "obras executadas por nós"],
             ].map(([v, k]) => (
@@ -295,9 +295,6 @@ function Home() {
           </ul>
         </div>
       </section>
-
-      <Testimonials />
-
 
       {/* FAQ */}
       <section className="border-t border-border">
