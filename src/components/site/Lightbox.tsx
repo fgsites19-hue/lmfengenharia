@@ -80,9 +80,9 @@ export function Lightbox({
           <button
             aria-label="Próxima imagem"
             onClick={() => onIndexChange(((index as number) + 1) % images.length)}
-            className="p-2 text-ink-foreground/60 transition-colors hover:text-accent"
+            className="absolute right-0 bottom-2 z-10 rounded-full bg-ink/70 p-3 text-ink-foreground/70 transition-colors hover:text-accent sm:static sm:bg-transparent sm:p-2"
           >
-            <ChevronRight className="size-8" />
+            <ChevronRight className="size-7 sm:size-8" />
           </button>
         )}
       </div>
