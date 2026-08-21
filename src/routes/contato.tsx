@@ -100,16 +100,25 @@ function ContatoPage() {
               const tel = String(data.get("tel") ?? "");
               const tipo = String(data.get("tipo") ?? "");
               const area = String(data.get("area") ?? "");
+              const fase = String(data.get("fase") ?? "");
+              const briefing = String(data.get("briefing") ?? "");
               const msg = String(data.get("msg") ?? "");
-              trackLeadSubmit({ tipo_obra: tipo, tem_area: Boolean(area.trim()) });
+              trackLeadSubmit({
+                tipo_obra: tipo,
+                tem_area: Boolean(area.trim()),
+                tem_briefing: Boolean(briefing.trim()),
+                fase_projeto: fase,
+              });
 
               const lines = [
                 "Olá! Gostaria de solicitar um orçamento de obra com a LMF Engenharia.",
                 `Nome: ${nome}`,
                 email && `E-mail: ${email}`,
                 tel && `Telefone: ${tel}`,
-                `Tipo de obra: ${tipo}`,
+                `Tipo de projeto: ${tipo}`,
+                fase && `Fase do projeto: ${fase}`,
                 area && `Área aproximada: ${area} m²`,
+                briefing && `Projeto/briefing: ${briefing}`,
                 msg && `Sobre o projeto: ${msg}`,
               ].filter(Boolean);
 
@@ -141,12 +150,14 @@ function ContatoPage() {
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
                 <label className="label-mono text-muted-foreground" htmlFor="tipo">
-                  Tipo de obra
+                  Tipo de projeto
                 </label>
                 <select id="tipo" name="tipo" className={fieldClass}>
+                  <option>Residencial alto padrão</option>
                   <option>Residencial</option>
                   <option>Comercial</option>
-                  <option>Industrial</option>
+                  <option>Incorporação</option>
+                  <option>Institucional</option>
                   <option>Reforma</option>
                   <option>Outro</option>
                 </select>
@@ -155,14 +166,54 @@ function ContatoPage() {
                 <label className="label-mono text-muted-foreground" htmlFor="area">
                   Área aproximada (m²)
                 </label>
-                <input id="area" name="area" className={fieldClass} />
+                <input
+                  id="area"
+                  name="area"
+                  inputMode="numeric"
+                  placeholder="Opcional"
+                  className={fieldClass}
+                />
               </div>
+            </div>
+            <div>
+              <label className="label-mono text-muted-foreground" htmlFor="fase">
+                Fase do projeto
+              </label>
+              <select id="fase" name="fase" className={fieldClass}>
+                <option>Projeto executivo pronto</option>
+                <option>Projeto arquitetônico apenas</option>
+                <option>Estudo preliminar</option>
+                <option>Ainda sem projeto</option>
+              </select>
+            </div>
+            <div>
+              <label className="label-mono text-muted-foreground" htmlFor="briefing">
+                Link do projeto ou briefing
+              </label>
+              <input
+                id="briefing"
+                name="briefing"
+                type="url"
+                inputMode="url"
+                placeholder="Drive, Dropbox, WeTransfer (opcional)"
+                aria-describedby="briefing-help"
+                className={fieldClass}
+              />
+              <p id="briefing-help" className="mt-2 text-xs text-muted-foreground">
+                Se preferir, envie os arquivos direto pelo WhatsApp depois.
+              </p>
             </div>
             <div>
               <label className="label-mono text-muted-foreground" htmlFor="msg">
                 Sobre o projeto
               </label>
-              <textarea id="msg" name="msg" rows={5} className={fieldClass} />
+              <textarea
+                id="msg"
+                name="msg"
+                rows={5}
+                placeholder="Conte o que você já tem definido e o que precisa saber."
+                className={fieldClass}
+              />
             </div>
             <button
               type="submit"

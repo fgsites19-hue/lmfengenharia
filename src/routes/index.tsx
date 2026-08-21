@@ -1,11 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { ArrowRight, Minus, Plus } from "lucide-react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
-import { SITE_URL, whatsappLink } from "@/lib/site";
-import { projects, coverOf } from "@/data/projects";
+import { DeliverablePreview } from "@/components/site/DeliverablePreview";
+import { RESPONSIBLE, SITE_URL, whatsappLink } from "@/lib/site";
+import { projects, coverOf, portfolioStats } from "@/data/projects";
+
+const stats = portfolioStats();
 
 const faq = [
   [
@@ -27,6 +31,23 @@ const faq = [
   [
     "Atendem fora da minha cidade?",
     "Sim. O trabalho é remoto e atendemos todo o Brasil, com bases de custo regionalizadas conforme a localidade da obra.",
+  ],
+  [
+    "Como é calculado o valor da consultoria?",
+    // TROCAR: confirme com o Leonardo como ele precifica (por m², por complexidade, valor fixo por faixa) para deixar esta resposta específica.
+    "O valor depende do porte da obra, da tipologia e do nível de detalhe necessário. Analisamos o material do seu projeto e apresentamos o escopo e o valor antes de qualquer compromisso, sem custo para essa avaliação inicial.",
+  ],
+  [
+    "Quais arquivos preciso enviar?",
+    "O ideal é o projeto arquitetônico e os projetos complementares que já existirem, junto com o memorial descritivo. Se você tem só a planta, ou só a área estimada, também conseguimos começar e indicamos o que falta.",
+  ],
+  [
+    "Vocês emitem ART?",
+    "Sim, com ART emitida quando o escopo contratado exige, sob responsabilidade de engenheiro civil registrado no CREA.",
+  ],
+  [
+    "O orçamento serve para negociar com a construtora?",
+    "É exatamente para isso que ele existe. Com a planilha analítica em mãos você compara propostas item a item, identifica omissões e sobrepreços, e negocia com base em número próprio, não no número de quem vai executar.",
   ],
 ];
 
@@ -119,24 +140,26 @@ function Home() {
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-accent px-7 py-4 text-center text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
+              onClick={() => trackWhatsAppClick("hero")}
+              className="group inline-flex items-center justify-center gap-3 bg-accent px-7 py-4 text-center text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
             >
-              Solicitar orçamento
+              Analisar minha obra
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </a>
             <Link
-              to="/servicos"
+              to="/projetos"
               className="border border-ink-foreground/30 px-7 py-4 text-center text-xs font-semibold uppercase tracking-widest text-ink-foreground transition-colors hover:border-ink-foreground"
             >
-              Ver serviços
+              Ver obras orçadas
             </Link>
           </div>
 
           <dl className="mt-14 grid max-w-3xl grid-cols-2 gap-px border border-ink-foreground/15 bg-ink-foreground/15 sm:mt-20 sm:grid-cols-4">
             {[
-              ["5+", "anos de experiência"],
-              ["4", "tipologias orçadas"],
+              [`+${stats.totalAreaThousands} mil`, "m² orçados em projeto"],
+              [`${stats.projectCount}`, "obras no portfólio"],
               ["100%", "memória de cálculo aberta"],
-              ["0", "obras executadas por nós"],
+              ["Zero", "obras executadas por nós"],
             ].map(([v, k]) => (
               <div key={k} className="bg-ink p-4 sm:p-5">
                 <dt className="font-display text-xl sm:text-2xl">
@@ -242,6 +265,8 @@ function Home() {
         </div>
       </section>
 
+      <DeliverablePreview />
+
       {/* Projetos */}
       <section className="border-t border-border bg-secondary">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
@@ -257,30 +282,54 @@ function Home() {
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-8 sm:mt-14 sm:grid-cols-2 md:grid-cols-3">
-            {projects.slice(0, 3).map((p, i) => (
+          <div className="mt-10 grid gap-6 sm:mt-14 sm:gap-8 md:grid-cols-2">
+            {projects.slice(0, 4).map((p, i) => (
               <Reveal key={p.slug} delay={i * 90}>
                 <Link to="/projetos/$slug" params={{ slug: p.slug }} className="group block">
-                  <div className="overflow-hidden border border-border">
+                  <div className="relative overflow-hidden border border-border">
                     <img
                       src={coverOf(p)}
                       alt={`${p.name}, ${p.area}, ${p.location} — obra orçada pela LMF Engenharia`}
                       width={1400}
-                      height={1050}
-                      loading="lazy"
+                      height={875}
+                      loading={i < 2 ? "eager" : "lazy"}
                       decoding="async"
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
+                    <span className="label-mono absolute left-0 top-0 bg-ink/85 px-3 py-2 text-ink-foreground backdrop-blur-sm">
+                      {p.category}
+                    </span>
                   </div>
-                  <h3 className="mt-5 text-lg transition-colors group-hover:text-accent">
-                    {p.name}
-                  </h3>
-                  <p className="label-mono mt-2 text-muted-foreground">
-                    {p.area} · {p.location}
-                  </p>
+                  <div className="mt-5 flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      <h3 className="text-lg transition-colors group-hover:text-accent sm:text-xl">
+                        {p.name}
+                      </h3>
+                      <p className="label-mono mt-2 text-muted-foreground">
+                        {p.area} · {p.location}
+                      </p>
+                    </div>
+                    <ArrowRight className="mt-1 size-4 shrink-0 text-accent transition-transform group-hover:translate-x-1" />
+                  </div>
                 </Link>
               </Reveal>
             ))}
+          </div>
+
+          <div className="mt-10 flex flex-col items-start gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted-foreground">
+              Tem um projeto parecido? Manda a planta que a gente analisa.
+            </p>
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick("portfolio")}
+              className="group inline-flex shrink-0 items-center gap-2 bg-accent px-6 py-3.5 text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
+            >
+              Analisar minha obra
+              <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+            </a>
           </div>
         </div>
       </section>
@@ -299,6 +348,23 @@ function Home() {
               sustentado por método — o mesmo número que você levará para a mesa de negociação com
               total segurança.
             </p>
+
+            <div className="mt-8 border-l-2 border-accent pl-5 sm:mt-10 sm:pl-6">
+              <p className="label-mono text-muted-foreground">Responsável técnico</p>
+              <p className="mt-2 font-display text-lg sm:text-xl">{RESPONSIBLE.name}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{RESPONSIBLE.role}</p>
+              {RESPONSIBLE.crea && (
+                <p className="label-mono mt-2 text-accent">CREA {RESPONSIBLE.crea}</p>
+              )}
+              <ul className="mt-4 space-y-1.5">
+                {RESPONSIBLE.education.map((item) => (
+                  <li key={item} className="flex gap-2.5 text-sm text-muted-foreground">
+                    <span className="mt-2 size-1 shrink-0 bg-accent" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <ul className="grid gap-px self-start border border-border bg-border">
             {[
@@ -336,9 +402,25 @@ function Home() {
             O que perguntam antes de contratar.
           </h2>
           <div className="mt-12 border-t border-border">
-            {faq.map(([q, a]) => (
-              <FaqItem key={q} q={q!} a={a!} />
+            {faq.map(([q, a], i) => (
+              <FaqItem key={q} q={q!} a={a!} id={String(i)} />
             ))}
+          </div>
+
+          <div className="mt-10 flex flex-col items-start gap-4 border border-border bg-secondary p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <p className="text-sm text-muted-foreground">
+              Ficou alguma dúvida sobre a sua obra especificamente?
+            </p>
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick("faq")}
+              className="group inline-flex shrink-0 items-center gap-2 border-b border-accent pb-1 text-xs font-semibold uppercase tracking-widest transition-colors hover:text-accent"
+            >
+              Falar direto no WhatsApp
+              <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+            </a>
           </div>
         </div>
       </section>
@@ -348,23 +430,32 @@ function Home() {
   );
 }
 
-function FaqItem({ q, a }: { q: string; a: string }) {
+function FaqItem({ q, a, id }: { q: string; a: string; id: string }) {
   const [open, setOpen] = useState(false);
+  const panelId = `faq-panel-${id}`;
+  const buttonId = `faq-button-${id}`;
+
   return (
     <div className="border-b border-border">
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 py-5 text-left sm:gap-6 sm:py-6"
-        aria-expanded={open}
-      >
-        <span className="font-display text-base sm:text-lg">{q}</span>
-        {open ? (
-          <Minus className="size-4 shrink-0 text-accent" />
-        ) : (
-          <Plus className="size-4 shrink-0 text-accent" />
-        )}
-      </button>
-      {open && <p className="max-w-2xl pb-6 text-sm leading-relaxed text-muted-foreground">{a}</p>}
+      <h3>
+        <button
+          id={buttonId}
+          onClick={() => setOpen((v) => !v)}
+          className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-accent sm:gap-6 sm:py-6"
+          aria-expanded={open}
+          aria-controls={panelId}
+        >
+          <span className="font-display text-base sm:text-lg">{q}</span>
+          {open ? (
+            <Minus className="size-4 shrink-0 text-accent" aria-hidden="true" />
+          ) : (
+            <Plus className="size-4 shrink-0 text-accent" aria-hidden="true" />
+          )}
+        </button>
+      </h3>
+      <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!open}>
+        <p className="max-w-2xl pb-6 text-sm leading-relaxed text-muted-foreground">{a}</p>
+      </div>
     </div>
   );
 }
