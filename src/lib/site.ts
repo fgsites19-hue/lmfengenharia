@@ -1,4 +1,4 @@
-export const SITE_URL = "https://lmfengenharia.lovable.app";
+export const SITE_URL = "https://lmf-engenharia.vercel.app";
 
 export const SITE_NAME = "LMF Engenharia";
 

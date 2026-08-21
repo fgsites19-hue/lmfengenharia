@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://lmfengenharia.lovable.app/sitemap.xml
+Sitemap: https://lmf-engenharia.vercel.app/sitemap.xml
