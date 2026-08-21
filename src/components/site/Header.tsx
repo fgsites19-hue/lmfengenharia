@@ -14,13 +14,17 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <img src="/images/logo.png" alt="LMF Engenharia" className="h-9 w-9 object-contain" />
-          <span className="label-mono text-foreground">LMF Engenharia</span>
+      <div className="mx-auto grid h-14 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:h-16 sm:px-6">
+        <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)}>
+          <img
+            src="/images/logo.png"
+            alt="LMF Engenharia"
+            className="h-8 w-8 shrink-0 object-contain sm:h-9 sm:w-9"
+          />
+          <span className="label-mono truncate text-foreground">LMF Engenharia</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center justify-self-end gap-8 md:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
@@ -40,13 +44,18 @@ export function Header() {
           </Link>
         </nav>
 
-        <button className="md:hidden" aria-label="Abrir menu" onClick={() => setOpen((v) => !v)}>
+        <button
+          className="-mr-2 shrink-0 p-2 md:hidden"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background md:hidden">
+        <div className="animate-in slide-in-from-top-2 fade-in border-t border-border bg-background duration-200 md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col px-4 py-3 sm:px-6">
             {nav.map((item) => (
               <Link

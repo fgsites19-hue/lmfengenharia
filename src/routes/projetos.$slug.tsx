@@ -50,7 +50,9 @@ function ProjetoPage() {
           >
             <ArrowLeft className="size-3.5" /> Voltar aos projetos
           </Link>
-          <SectionLabel>{p.category}</SectionLabel>
+          <div className="mt-6">
+            <SectionLabel>{p.category}</SectionLabel>
+          </div>
           <h1 className="mt-4 max-w-3xl text-[2rem] leading-[1.1] sm:mt-5 sm:text-5xl sm:leading-[1.05] md:text-6xl">
             {p.name}
           </h1>
