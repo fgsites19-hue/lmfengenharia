@@ -54,16 +54,16 @@ export function Lightbox({
         </button>
       </div>
       <div
-        className="flex flex-1 items-center justify-center gap-4"
+        className="relative flex flex-1 items-center justify-center gap-2 sm:gap-4"
         onClick={(e) => e.stopPropagation()}
       >
         {images.length > 1 && (
           <button
             aria-label="Imagem anterior"
             onClick={() => onIndexChange(((index as number) - 1 + images.length) % images.length)}
-            className="p-2 text-ink-foreground/60 transition-colors hover:text-accent"
+            className="absolute left-0 bottom-2 z-10 rounded-full bg-ink/70 p-3 text-ink-foreground/70 transition-colors hover:text-accent sm:static sm:bg-transparent sm:p-2"
           >
-            <ChevronLeft className="size-8" />
+            <ChevronLeft className="size-7 sm:size-8" />
           </button>
         )}
         <figure className="max-h-full">
@@ -80,9 +80,9 @@ export function Lightbox({
           <button
             aria-label="Próxima imagem"
             onClick={() => onIndexChange(((index as number) + 1) % images.length)}
-            className="p-2 text-ink-foreground/60 transition-colors hover:text-accent"
+            className="absolute right-0 bottom-2 z-10 rounded-full bg-ink/70 p-3 text-ink-foreground/70 transition-colors hover:text-accent sm:static sm:bg-transparent sm:p-2"
           >
-            <ChevronRight className="size-8" />
+            <ChevronRight className="size-7 sm:size-8" />
           </button>
         )}
       </div>

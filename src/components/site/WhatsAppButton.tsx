@@ -10,9 +10,9 @@ export function WhatsAppButton() {
       rel="noopener noreferrer"
       aria-label="Falar com a LMF Engenharia no WhatsApp"
       onClick={() => trackWhatsAppClick("floating_button")}
-      className="group fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-[#25D366] px-4 py-4 text-background shadow-lg shadow-black/20 transition-transform duration-300 hover:scale-105 md:bottom-8 md:right-8"
+      className="group fixed bottom-4 right-4 z-50 flex items-center gap-3 rounded-full bg-[#25D366] p-3.5 text-background shadow-lg shadow-black/20 transition-transform duration-300 hover:scale-105 md:bottom-8 md:right-8 md:p-4"
     >
-      <MessageCircle className="size-6 shrink-0 text-white" />
+      <MessageCircle className="size-5 shrink-0 text-white md:size-6" />
       <span className="hidden max-w-0 overflow-hidden whitespace-nowrap text-xs font-semibold uppercase tracking-widest text-white transition-all duration-300 group-hover:max-w-[12rem] md:inline">
         Falar no WhatsApp
       </span>
