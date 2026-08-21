@@ -24,7 +24,7 @@ export function Header() {
           <span className="label-mono truncate text-foreground">LMF Engenharia</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center justify-self-end gap-8 md:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
