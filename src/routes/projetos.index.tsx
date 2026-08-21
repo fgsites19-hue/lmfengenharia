@@ -78,7 +78,10 @@ function ProjetosPage() {
                   <img
                     src={coverOf(p)}
                     alt={`${p.name}, ${p.area}, ${p.location} — obra orçada pela LMF Engenharia`}
-                    loading="lazy"
+                    width={1400}
+                    height={875}
+                    loading={i < 2 ? "eager" : "lazy"}
+                    decoding="async"
                     className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>

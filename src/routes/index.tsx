@@ -7,48 +7,6 @@ import { Counter } from "@/components/site/Counter";
 import { SITE_URL, whatsappLink } from "@/lib/site";
 import { projects, coverOf } from "@/data/projects";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
-      {
-        name: "description",
-        content:
-          "Orçamento analítico de obras com memória de cálculo aberta, quantitativos, cronograma físico-financeiro e controle de custos.",
-      },
-      { property: "og:title", content: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
-      {
-        property: "og:description",
-        content:
-          "Planilhas orçamentárias claras e defensáveis para negociar com construtoras e fornecedores. Atendimento em todo o Brasil.",
-      },
-      { property: "og:url", content: `${SITE_URL}/` },
-      { property: "og:image", content: `${SITE_URL}/images/hero-mansao-floresta.jpg` },
-    ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: "LMF Engenharia",
-          url: SITE_URL,
-          inLanguage: "pt-BR",
-        }),
-      },
-    ],
-  }),
-  component: Home,
-});
-
-const steps = [
-  ["01", "Diagnóstico", "Entendemos a fase do projeto, o escopo e o nível de detalhe necessário."],
-  ["02", "Levantamento", "Extração de quantitativos com memória de cálculo aberta e auditável."],
-  ["03", "Composição", "Custos unitários com insumos, mão de obra, encargos e BDI definidos."],
-  ["04", "Entrega", "Planilha analítica, resumo gerencial e cronograma de desembolso."],
-];
-
 const faq = [
   [
     "Vocês executam obras?",
@@ -72,6 +30,63 @@ const faq = [
   ],
 ];
 
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
+      {
+        name: "description",
+        content:
+          "Orçamento analítico de obras com memória de cálculo aberta, quantitativos, cronograma físico-financeiro e controle de custos.",
+      },
+      { property: "og:title", content: "Orçamento de Obras com Precisão Técnica | LMF Engenharia" },
+      {
+        property: "og:description",
+        content:
+          "Planilhas orçamentárias claras e defensáveis para negociar com construtoras e fornecedores. Atendimento em todo o Brasil.",
+      },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: `${SITE_URL}/images/hero-mansao-floresta.jpg` },
+    ],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
+      { rel: "preload", as: "image", href: "/images/hero-mansao-floresta.jpg" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "LMF Engenharia",
+          url: SITE_URL,
+          inLanguage: "pt-BR",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map(([question, answer]) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: { "@type": "Answer", text: answer },
+          })),
+        }),
+      },
+    ],
+  }),
+  component: Home,
+});
+
+const steps = [
+  ["01", "Diagnóstico", "Entendemos a fase do projeto, o escopo e o nível de detalhe necessário."],
+  ["02", "Levantamento", "Extração de quantitativos com memória de cálculo aberta e auditável."],
+  ["03", "Composição", "Custos unitários com insumos, mão de obra, encargos e BDI definidos."],
+  ["04", "Entrega", "Planilha analítica, resumo gerencial e cronograma de desembolso."],
+];
+
 function Home() {
   return (
     <>
@@ -80,6 +95,10 @@ function Home() {
         <img
           src="/images/hero-mansao-floresta.jpg"
           alt="Residência de alto padrão orçada pela LMF Engenharia"
+          width={1400}
+          height={787}
+          fetchPriority="high"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover opacity-25 motion-safe:animate-[hero-zoom_16s_ease-out_forwards]"
         />
         <div className="absolute inset-0 grid-lines opacity-40" />
@@ -246,7 +265,10 @@ function Home() {
                     <img
                       src={coverOf(p)}
                       alt={`${p.name}, ${p.area}, ${p.location} — obra orçada pela LMF Engenharia`}
+                      width={1400}
+                      height={1050}
                       loading="lazy"
+                      decoding="async"
                       className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>

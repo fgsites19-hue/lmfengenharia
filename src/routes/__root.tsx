@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
+import { CookieNotice } from "@/components/site/CookieNotice";
 import { SITE_NAME, SITE_URL, CONTACT_EMAIL } from "@/lib/site";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 
@@ -99,8 +100,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: `${SITE_URL}/images/predio-argos-1.jpg` },
-      { property: "og:image:width", content: "1800" },
-      { property: "og:image:height", content: "1800" },
+      { property: "og:image:width", content: "1400" },
+      { property: "og:image:height", content: "1400" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: `${SITE_URL}/images/predio-argos-1.jpg` },
       { name: "robots", content: "index, follow" },
@@ -185,6 +186,7 @@ function RootComponent() {
         </main>
         <Footer />
         <WhatsAppButton />
+        <CookieNotice />
       </div>
     </QueryClientProvider>
   );

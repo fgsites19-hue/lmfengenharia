@@ -15,7 +15,11 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur">
       <div className="mx-auto grid h-14 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:h-16 sm:px-6">
-        <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)}>
+        <Link
+          to="/"
+          className="flex min-w-0 items-center gap-2.5 sm:gap-3"
+          onClick={() => setOpen(false)}
+        >
           <img
             src="/images/logo.png"
             alt="LMF Engenharia"

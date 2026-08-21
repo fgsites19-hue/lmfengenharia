@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { Lightbox } from "@/components/site/Lightbox";
-import { SITE_URL } from "@/lib/site";
-import { getProject, coverOf } from "@/data/projects";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { getProject, coverOf, neighborsOf } from "@/data/projects";
 
 export const Route = createFileRoute("/projetos/$slug")({
   loader: ({ params }) => {
@@ -28,9 +28,53 @@ export const Route = createFileRoute("/projetos/$slug")({
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
         { property: "og:url", content: `${SITE_URL}/projetos/${p?.slug ?? ""}` },
-        { property: "og:image", content: `${SITE_URL}${p ? coverOf(p) : "/images/predio-argos-1.jpg"}` },
+        {
+          property: "og:image",
+          content: `${SITE_URL}${p ? coverOf(p) : "/images/predio-argos-1.jpg"}`,
+        },
       ],
       links: [{ rel: "canonical", href: `${SITE_URL}/projetos/${p?.slug ?? ""}` }],
+      scripts: p
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "CreativeWork",
+                name: p.name,
+                description: p.summary,
+                url: `${SITE_URL}/projetos/${p.slug}`,
+                image: p.images.map((img) => `${SITE_URL}${img.src}`),
+                inLanguage: "pt-BR",
+                creator: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+                about: p.category,
+                locationCreated: { "@type": "Place", name: p.location },
+              }),
+            },
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Início", item: `${SITE_URL}/` },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Projetos",
+                    item: `${SITE_URL}/projetos`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: p.name,
+                    item: `${SITE_URL}/projetos/${p.slug}`,
+                  },
+                ],
+              }),
+            },
+          ]
+        : [],
     };
   },
   component: ProjetoPage,
@@ -89,7 +133,11 @@ function ProjetoPage() {
                   <img
                     src={img.src}
                     alt={`${p.name}, ${p.area}, ${p.location} — ${img.caption}`}
-                    loading="lazy"
+                    width={1600}
+                    height={1000}
+                    loading={i === 0 ? "eager" : "lazy"}
+                    fetchPriority={i === 0 ? "high" : "auto"}
+                    decoding="async"
                     className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </button>
@@ -101,6 +149,8 @@ function ProjetoPage() {
           ))}
         </div>
       </section>
+
+      <ProjectNav slug={p.slug} />
 
       <Lightbox
         images={p.images}
@@ -115,5 +165,39 @@ function ProjetoPage() {
         text="Envie plantas, memorial ou apenas a área estimada. Retornamos com escopo, prazo e valor do orçamento."
       />
     </>
+  );
+}
+
+function ProjectNav({ slug }: { slug: string }) {
+  const { prev, next } = neighborsOf(slug);
+  if (!prev || !next) return null;
+
+  return (
+    <nav aria-label="Navegação entre projetos" className="border-t border-border bg-secondary">
+      <div className="mx-auto grid max-w-6xl gap-px sm:grid-cols-2">
+        <Link
+          to="/projetos/$slug"
+          params={{ slug: prev.slug }}
+          className="group flex items-center gap-4 border-b border-border px-4 py-6 transition-colors hover:bg-background sm:border-b-0 sm:border-r sm:px-6 sm:py-8"
+        >
+          <ArrowLeft className="size-4 shrink-0 text-accent transition-transform group-hover:-translate-x-1" />
+          <span className="min-w-0">
+            <span className="label-mono block text-muted-foreground">Projeto anterior</span>
+            <span className="mt-1 block truncate text-base sm:text-lg">{prev.name}</span>
+          </span>
+        </Link>
+        <Link
+          to="/projetos/$slug"
+          params={{ slug: next.slug }}
+          className="group flex items-center justify-end gap-4 px-4 py-6 text-right transition-colors hover:bg-background sm:px-6 sm:py-8"
+        >
+          <span className="min-w-0">
+            <span className="label-mono block text-muted-foreground">Próximo projeto</span>
+            <span className="mt-1 block truncate text-base sm:text-lg">{next.name}</span>
+          </span>
+          <ArrowRight className="size-4 shrink-0 text-accent transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </nav>
   );
 }

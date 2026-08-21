@@ -310,3 +310,13 @@ export function usedCategories(): ProjectCategory[] {
 export function coverOf(p: Project) {
   return p.images[0]?.src ?? "";
 }
+
+/** Projeto anterior e próximo na ordem do portfólio, com volta ao início/fim. */
+export function neighborsOf(slug: string) {
+  const i = projects.findIndex((p) => p.slug === slug);
+  if (i === -1) return { prev: undefined, next: undefined };
+  return {
+    prev: projects[(i - 1 + projects.length) % projects.length],
+    next: projects[(i + 1) % projects.length],
+  };
+}
