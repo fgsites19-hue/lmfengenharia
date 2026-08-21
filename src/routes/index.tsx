@@ -6,10 +6,9 @@ import { CtaBand, SectionLabel } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { DeliverablePreview } from "@/components/site/DeliverablePreview";
-import { RESPONSIBLE, SITE_URL, whatsappLink } from "@/lib/site";
-import { coverOf, portfolioStats, oneProjectPerCategory } from "@/data/projects";
+import { RESPONSIBLE, SITE_URL, TRACK_RECORD, whatsappLink } from "@/lib/site";
+import { coverOf, oneProjectPerCategory } from "@/data/projects";
 
-const stats = portfolioStats();
 const homeProjects = oneProjectPerCategory();
 
 const faq = [
@@ -156,10 +155,10 @@ function Home() {
 
           <dl className="mt-14 grid max-w-3xl grid-cols-2 gap-px border border-ink-foreground/15 bg-ink-foreground/15 sm:mt-20 sm:grid-cols-4">
             {[
-              [`+${stats.totalAreaThousands} mil`, "m² orçados em projeto"],
-              [`${stats.projectCount}`, "obras no portfólio"],
-              ["5+", "anos dedicados a orçamento"],
-              ["100%", "memória de cálculo aberta"],
+              [TRACK_RECORD.areaOrcada, "m² orçados"],
+              [TRACK_RECORD.obrasOrcadas, "obras orçadas"],
+              [TRACK_RECORD.empresasParceiras, "empresas parceiras"],
+              ["Brasil", "atendimento em todo o país"],
             ].map(([v, k]) => (
               <div key={k} className="bg-ink p-4 sm:p-5">
                 <dt className="font-display text-xl sm:text-2xl">
@@ -385,10 +384,7 @@ function Home() {
           </div>
           <ul className="grid gap-px self-start border border-border bg-border">
             {[
-              [
-                "Responsável técnico",
-                "Engenharia civil registrada, com ART emitida quando aplicável.",
-              ],
+              ["ART quando aplicável", "Responsabilidade técnica registrada no escopo que exige."],
               [
                 "Transparência integral",
                 "Planilha editável, composições e memória de cálculo nas suas mãos.",

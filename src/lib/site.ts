@@ -17,6 +17,22 @@ export const INSTAGRAM_HANDLE = "_lmfengenharia";
 export const INSTAGRAM_URL = `https://www.instagram.com/${INSTAGRAM_HANDLE}`;
 
 /**
+ * Números de trajetória da empresa, informados pelo Leonardo.
+ *
+ * Diferem de propósito do que o portfólio do site soma: o portfólio publicado é
+ * uma seleção de obras, enquanto estes são os totais acumulados de atuação. Por
+ * isso os rótulos falam em "orçados/orçadas", e não em "no portfólio" — se um
+ * dia passarem a dizer "portfólio", vão contradizer as obras listadas no site.
+ *
+ * TROCAR: revalide com o Leonardo antes de cada atualização do site.
+ */
+export const TRACK_RECORD = {
+  areaOrcada: "+100 mil",
+  obrasOrcadas: "+200",
+  empresasParceiras: "+30",
+} as const;
+
+/**
  * Responsável técnico.
  *
  * `name` está com o primeiro nome apenas e `crea` está vazio porque são os dados

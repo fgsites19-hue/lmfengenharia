@@ -346,25 +346,6 @@ export function coverOf(p: Project) {
   return p.images[0]?.src ?? "";
 }
 
-/**
- * Métricas derivadas do próprio portfólio, para nunca divergirem dos projetos publicados.
- * `totalArea` soma apenas os projetos com metragem confirmada, por isso é apresentada
- * como valor mínimo ("+") no site.
- */
-export function portfolioStats() {
-  const areas = projects
-    .map((p) => p.area.match(/^([\d.]+)\s*m²$/))
-    .filter((m): m is RegExpMatchArray => m !== null)
-    .map((m) => Number(m[1]!.replace(/\./g, "")));
-
-  return {
-    projectCount: projects.length,
-    totalArea: areas.reduce((sum, a) => sum + a, 0),
-    /** Milhares de m², arredondado para baixo — mantém o "+" honesto. */
-    totalAreaThousands: Math.floor(areas.reduce((sum, a) => sum + a, 0) / 1000),
-  };
-}
-
 /** Projeto anterior e próximo na ordem do portfólio, com volta ao início/fim. */
 export function neighborsOf(slug: string) {
   const i = projects.findIndex((p) => p.slug === slug);
