@@ -23,6 +23,7 @@ export const Route = createFileRoute("/projetos/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:url", content: `${SITE_URL}/projetos` },
+      { property: "og:image", content: `${SITE_URL}/images/predio-argos-1.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/projetos` }],
   }),
@@ -44,8 +45,8 @@ function ProjetosPage() {
             Projetos que passaram pela nossa planilha antes do canteiro.
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base">
-            Uma seleção de obras em que atuamos no orçamento, no planejamento de desembolso
-            ou no controle de custos durante a execução.
+            Uma seleção de obras em que atuamos no orçamento, no planejamento de desembolso ou no
+            controle de custos durante a execução.
           </p>
         </div>
       </section>
@@ -82,7 +83,9 @@ function ProjetosPage() {
                   />
                 </div>
                 <p className="label-mono mt-5 text-accent">{p.category}</p>
-                <h2 className="mt-2 text-xl transition-colors group-hover:text-accent sm:text-2xl">{p.name}</h2>
+                <h2 className="mt-2 text-xl transition-colors group-hover:text-accent sm:text-2xl">
+                  {p.name}
+                </h2>
                 <p className="label-mono mt-2 text-muted-foreground">
                   {p.area} · {p.location}
                 </p>

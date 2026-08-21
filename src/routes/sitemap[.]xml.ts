@@ -3,7 +3,6 @@ import type {} from "@tanstack/react-start";
 import { SITE_URL } from "@/lib/site";
 import { projects } from "@/data/projects";
 
-
 interface SitemapEntry {
   path: string;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
@@ -25,7 +24,6 @@ export const Route = createFileRoute("/sitemap.xml")({
             priority: "0.7",
           })),
         ];
-
 
         const urls = entries.map((e) =>
           [

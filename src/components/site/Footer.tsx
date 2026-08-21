@@ -11,18 +11,34 @@ export function Footer() {
             <span className="label-mono">LMF Engenharia</span>
           </div>
           <p className="mt-5 max-w-sm text-sm text-ink-foreground/60">
-            Orçamento de obras, planilhas, cronogramas e controle de custos para
-            construtoras, incorporadoras, escritórios de arquitetura e clientes finais.
+            Orçamento de obras, planilhas, cronogramas e controle de custos para construtoras,
+            incorporadoras, escritórios de arquitetura e clientes finais.
           </p>
         </div>
 
         <div>
           <p className="label-mono text-ink-foreground/50">Navegação</p>
           <ul className="mt-4 space-y-2 text-sm">
-            <li><Link to="/" className="text-ink-foreground/70 hover:text-ink-foreground">Início</Link></li>
-            <li><Link to="/servicos" className="text-ink-foreground/70 hover:text-ink-foreground">Serviços</Link></li>
-            <li><Link to="/projetos" className="text-ink-foreground/70 hover:text-ink-foreground">Projetos</Link></li>
-            <li><Link to="/contato" className="text-ink-foreground/70 hover:text-ink-foreground">Contato</Link></li>
+            <li>
+              <Link to="/" className="text-ink-foreground/70 hover:text-ink-foreground">
+                Início
+              </Link>
+            </li>
+            <li>
+              <Link to="/servicos" className="text-ink-foreground/70 hover:text-ink-foreground">
+                Serviços
+              </Link>
+            </li>
+            <li>
+              <Link to="/projetos" className="text-ink-foreground/70 hover:text-ink-foreground">
+                Projetos
+              </Link>
+            </li>
+            <li>
+              <Link to="/contato" className="text-ink-foreground/70 hover:text-ink-foreground">
+                Contato
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -30,7 +46,12 @@ export function Footer() {
           <p className="label-mono text-ink-foreground/50">Contato</p>
           <ul className="mt-4 space-y-2 text-sm text-ink-foreground/70">
             <li>
-              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hover:text-ink-foreground">
+              <a
+                href={whatsappLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-ink-foreground"
+              >
                 WhatsApp
               </a>
             </li>
@@ -40,7 +61,12 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-ink-foreground">
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-ink-foreground"
+              >
                 Instagram
               </a>
             </li>

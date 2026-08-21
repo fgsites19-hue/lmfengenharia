@@ -3,9 +3,9 @@ import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { CtaBand, SectionLabel } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
+import { Counter } from "@/components/site/Counter";
 import { SITE_URL, whatsappLink } from "@/lib/site";
 import { projects, coverOf } from "@/data/projects";
-
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,6 +23,7 @@ export const Route = createFileRoute("/")({
           "Planilhas orçamentárias claras e defensáveis para negociar com construtoras e fornecedores. Atendimento em todo o Brasil.",
       },
       { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: `${SITE_URL}/images/hero-mansao-floresta.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
@@ -40,7 +41,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Home,
 });
-
 
 const steps = [
   ["01", "Diagnóstico", "Entendemos a fase do projeto, o escopo e o nível de detalhe necessário."],
@@ -80,7 +80,7 @@ function Home() {
         <img
           src="/images/hero-mansao-floresta.jpg"
           alt="Residência de alto padrão orçada pela LMF Engenharia"
-          className="absolute inset-0 h-full w-full object-cover opacity-25"
+          className="absolute inset-0 h-full w-full object-cover opacity-25 motion-safe:animate-[hero-zoom_16s_ease-out_forwards]"
         />
         <div className="absolute inset-0 grid-lines opacity-40" />
         <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 md:py-36">
@@ -91,9 +91,9 @@ function Home() {
             Precisa do custo real da sua obra.
           </h1>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-foreground/70 sm:mt-7 sm:text-base">
-            Consultoria independente em custos de construção. Transformamos projetos em
-            orçamentos analíticos rastreáveis, com memória de cálculo aberta e o rigor
-            necessário para sustentar cada decisão de investimento.
+            Consultoria independente em custos de construção. Transformamos projetos em orçamentos
+            analíticos rastreáveis, com memória de cálculo aberta e o rigor necessário para
+            sustentar cada decisão de investimento.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
@@ -120,7 +120,9 @@ function Home() {
               ["0", "obras executadas por nós"],
             ].map(([v, k]) => (
               <div key={k} className="bg-ink p-4 sm:p-5">
-                <dt className="font-display text-xl sm:text-2xl">{v}</dt>
+                <dt className="font-display text-xl sm:text-2xl">
+                  <Counter value={v!} />
+                </dt>
                 <dd className="label-mono mt-2 text-ink-foreground/50">{k}</dd>
               </div>
             ))}
@@ -199,7 +201,6 @@ function Home() {
               </Reveal>
             ))}
           </div>
-
         </div>
       </section>
 
@@ -220,7 +221,6 @@ function Home() {
             </Reveal>
           ))}
         </div>
-
       </section>
 
       {/* Projetos */}
@@ -260,8 +260,6 @@ function Home() {
               </Reveal>
             ))}
           </div>
-
-
         </div>
       </section>
 
@@ -274,18 +272,30 @@ function Home() {
               Independência técnica é o nosso produto.
             </h2>
             <p className="mt-6 text-muted-foreground">
-              Não vendemos material, não executamos obra e não intermediamos fornecedor.
-              Essa distância é deliberada: ela é o que permite entregar um número imparcial,
-              auditável e sustentado por método — o mesmo número que você levará para a mesa
-              de negociação com total segurança.
+              Não vendemos material, não executamos obra e não intermediamos fornecedor. Essa
+              distância é deliberada: ela é o que permite entregar um número imparcial, auditável e
+              sustentado por método — o mesmo número que você levará para a mesa de negociação com
+              total segurança.
             </p>
           </div>
           <ul className="grid gap-px self-start border border-border bg-border">
             {[
-              ["Responsável técnico", "Engenharia civil registrada, com ART emitida quando aplicável."],
-              ["Transparência integral", "Planilha editável, composições e memória de cálculo nas suas mãos."],
-              ["Bases regionalizadas", "SINAPI, SICRO e cotações reais de mercado na praça da sua obra."],
-              ["Acompanhamento próximo", "Reunião de entrega e suporte técnico durante toda a negociação."],
+              [
+                "Responsável técnico",
+                "Engenharia civil registrada, com ART emitida quando aplicável.",
+              ],
+              [
+                "Transparência integral",
+                "Planilha editável, composições e memória de cálculo nas suas mãos.",
+              ],
+              [
+                "Bases regionalizadas",
+                "SINAPI, SICRO e cotações reais de mercado na praça da sua obra.",
+              ],
+              [
+                "Acompanhamento próximo",
+                "Reunião de entrega e suporte técnico durante toda a negociação.",
+              ],
             ].map(([t, d]) => (
               <li key={t} className="bg-background p-5 sm:p-6">
                 <h3 className="text-base">{t}</h3>
@@ -307,7 +317,6 @@ function Home() {
             {faq.map(([q, a]) => (
               <FaqItem key={q} q={q!} a={a!} />
             ))}
-
           </div>
         </div>
       </section>

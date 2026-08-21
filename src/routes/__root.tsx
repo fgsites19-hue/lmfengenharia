@@ -17,7 +17,6 @@ import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { SITE_NAME, SITE_URL, CONTACT_EMAIL } from "@/lib/site";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -99,7 +98,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Especialistas em orçamento de obras: planilhas analíticas, quantitativos e controle de custos.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: `${SITE_URL}/images/predio-argos-1.jpg` },
+      { property: "og:image:width", content: "1800" },
+      { property: "og:image:height", content: "1800" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_URL}/images/predio-argos-1.jpg` },
       { name: "robots", content: "index, follow" },
     ],
     links: [
@@ -169,7 +172,6 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -187,4 +189,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

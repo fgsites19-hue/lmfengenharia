@@ -40,11 +40,7 @@ export function Header() {
           </Link>
         </nav>
 
-        <button
-          className="md:hidden"
-          aria-label="Abrir menu"
-          onClick={() => setOpen((v) => !v)}
-        >
+        <button className="md:hidden" aria-label="Abrir menu" onClick={() => setOpen((v) => !v)}>
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </div>

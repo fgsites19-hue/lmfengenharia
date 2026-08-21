@@ -19,6 +19,7 @@ export const Route = createFileRoute("/servicos")({
           "Do estudo de viabilidade à última medição: orçamento analítico, curva S, auditoria de propostas e controle de custos.",
       },
       { property: "og:url", content: `${SITE_URL}/servicos` },
+      { property: "og:image", content: `${SITE_URL}/images/predio-argos-1.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/servicos` }],
     scripts: [
@@ -38,7 +39,11 @@ export const Route = createFileRoute("/servicos")({
           ].map((name, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            item: { "@type": "Service", name, provider: { "@type": "Organization", name: "LMF Engenharia" } },
+            item: {
+              "@type": "Service",
+              name,
+              provider: { "@type": "Organization", name: "LMF Engenharia" },
+            },
           })),
         }),
       },
@@ -46,7 +51,6 @@ export const Route = createFileRoute("/servicos")({
   }),
   component: ServicosPage,
 });
-
 
 const services = [
   {
@@ -97,8 +101,8 @@ function ServicosPage() {
             Cada número da sua obra com origem, método e responsável técnico.
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base">
-            Trabalhamos exclusivamente com custos de construção. Isso significa profundidade
-            em levantamento, composição e controle — sem conflito de interesse com a execução.
+            Trabalhamos exclusivamente com custos de construção. Isso significa profundidade em
+            levantamento, composição e controle — sem conflito de interesse com a execução.
           </p>
         </div>
       </section>
@@ -123,7 +127,6 @@ function ServicosPage() {
             </Reveal>
           ))}
         </div>
-
       </section>
 
       <CtaBand

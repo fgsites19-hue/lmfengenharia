@@ -17,9 +17,11 @@ export const Route = createFileRoute("/contato")({
       { property: "og:title", content: "Solicitar Orçamento de Obra | LMF Engenharia" },
       {
         property: "og:description",
-        content: "Envie plantas, memorial ou apenas a área estimada. Retornamos com escopo e prazo.",
+        content:
+          "Envie plantas, memorial ou apenas a área estimada. Retornamos com escopo e prazo.",
       },
       { property: "og:url", content: `${SITE_URL}/contato` },
+      { property: "og:image", content: `${SITE_URL}/images/predio-argos-1.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/contato` }],
     scripts: [
@@ -38,7 +40,6 @@ export const Route = createFileRoute("/contato")({
   component: ContatoPage,
 });
 
-
 const fieldClass =
   "mt-2 w-full border border-input bg-background px-4 py-3 text-base outline-none transition-colors focus:border-accent sm:text-sm";
 
@@ -53,8 +54,8 @@ function ContatoPage() {
           Solicite o orçamento da sua obra.
         </h1>
         <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base">
-          Quanto mais informação você enviar, mais preciso é o nosso retorno. Se ainda não
-          tiver projeto, tudo bem — trabalhamos também com estimativa preliminar por área.
+          Quanto mais informação você enviar, mais preciso é o nosso retorno. Se ainda não tiver
+          projeto, tudo bem — trabalhamos também com estimativa preliminar por área.
         </p>
 
         <ul className="mt-8 space-y-5 border-t border-border pt-6 sm:mt-10 sm:space-y-6 sm:pt-8">
@@ -118,22 +119,30 @@ function ContatoPage() {
             className="space-y-6"
           >
             <div>
-              <label className="label-mono text-muted-foreground" htmlFor="nome">Nome</label>
+              <label className="label-mono text-muted-foreground" htmlFor="nome">
+                Nome
+              </label>
               <input id="nome" name="nome" required className={fieldClass} />
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
-                <label className="label-mono text-muted-foreground" htmlFor="email">E-mail</label>
+                <label className="label-mono text-muted-foreground" htmlFor="email">
+                  E-mail
+                </label>
                 <input id="email" name="email" type="email" required className={fieldClass} />
               </div>
               <div>
-                <label className="label-mono text-muted-foreground" htmlFor="tel">Telefone</label>
+                <label className="label-mono text-muted-foreground" htmlFor="tel">
+                  Telefone
+                </label>
                 <input id="tel" name="tel" className={fieldClass} />
               </div>
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
-                <label className="label-mono text-muted-foreground" htmlFor="tipo">Tipo de obra</label>
+                <label className="label-mono text-muted-foreground" htmlFor="tipo">
+                  Tipo de obra
+                </label>
                 <select id="tipo" name="tipo" className={fieldClass}>
                   <option>Residencial</option>
                   <option>Comercial</option>
@@ -143,7 +152,9 @@ function ContatoPage() {
                 </select>
               </div>
               <div>
-                <label className="label-mono text-muted-foreground" htmlFor="area">Área aproximada (m²)</label>
+                <label className="label-mono text-muted-foreground" htmlFor="area">
+                  Área aproximada (m²)
+                </label>
                 <input id="area" name="area" className={fieldClass} />
               </div>
             </div>

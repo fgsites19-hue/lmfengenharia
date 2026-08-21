@@ -5,7 +5,7 @@ import { CtaBand, SectionLabel } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { Lightbox } from "@/components/site/Lightbox";
 import { SITE_URL } from "@/lib/site";
-import { getProject } from "@/data/projects";
+import { getProject, coverOf } from "@/data/projects";
 
 export const Route = createFileRoute("/projetos/$slug")({
   loader: ({ params }) => {
@@ -15,7 +15,9 @@ export const Route = createFileRoute("/projetos/$slug")({
   },
   head: ({ loaderData }) => {
     const p = loaderData;
-    const title = p ? `${p.name} — ${p.area}, ${p.location} | LMF Engenharia` : "Projeto | LMF Engenharia";
+    const title = p
+      ? `${p.name} — ${p.area}, ${p.location} | LMF Engenharia`
+      : "Projeto | LMF Engenharia";
     const description = p?.summary ?? "Obra orçada pela LMF Engenharia.";
     return {
       meta: [
@@ -26,6 +28,7 @@ export const Route = createFileRoute("/projetos/$slug")({
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
         { property: "og:url", content: `${SITE_URL}/projetos/${p?.slug ?? ""}` },
+        { property: "og:image", content: `${SITE_URL}${p ? coverOf(p) : "/images/predio-argos-1.jpg"}` },
       ],
       links: [{ rel: "canonical", href: `${SITE_URL}/projetos/${p?.slug ?? ""}` }],
     };
@@ -48,7 +51,9 @@ function ProjetoPage() {
             <ArrowLeft className="size-3.5" /> Voltar aos projetos
           </Link>
           <SectionLabel>{p.category}</SectionLabel>
-          <h1 className="mt-4 max-w-3xl text-[2rem] leading-[1.1] sm:mt-5 sm:text-5xl sm:leading-[1.05] md:text-6xl">{p.name}</h1>
+          <h1 className="mt-4 max-w-3xl text-[2rem] leading-[1.1] sm:mt-5 sm:text-5xl sm:leading-[1.05] md:text-6xl">
+            {p.name}
+          </h1>
           <p className="label-mono mt-4 text-accent">
             {p.area} · {p.location}
           </p>

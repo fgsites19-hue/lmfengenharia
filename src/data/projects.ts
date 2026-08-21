@@ -1,8 +1,5 @@
 export type ProjectCategory =
-  | "Obras Residenciais"
-  | "Residencial Vertical"
-  | "Obras Comerciais"
-  | "Institucional e Saúde";
+  "Obras Residenciais" | "Residencial Vertical" | "Obras Comerciais" | "Institucional e Saúde";
 
 export type ProjectImage = {
   src: string;
