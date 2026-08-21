@@ -45,8 +45,9 @@ export function Header() {
         </nav>
 
         <button
-          className="md:hidden"
-          aria-label="Abrir menu"
+          className="-mr-2 shrink-0 p-2 md:hidden"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -54,7 +55,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background md:hidden">
+        <div className="animate-in slide-in-from-top-2 fade-in border-t border-border bg-background duration-200 md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col px-4 py-3 sm:px-6">
             {nav.map((item) => (
               <Link
