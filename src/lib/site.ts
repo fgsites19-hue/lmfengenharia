@@ -27,7 +27,17 @@ export const INSTAGRAM_URL = `https://www.instagram.com/${INSTAGRAM_HANDLE}`;
 export const RESPONSIBLE = {
   name: "Leonardo",
   role: "Engenheiro civil, responsável técnico",
+  /** Número do registro, sem o UF. Ex.: "5070552696". */
   crea: "",
+  /** Sigla do estado do registro. Ex.: "SP". */
+  creaUf: "",
+  /**
+   * Caminho da foto em /public. Está vazio de propósito: o Leonardo pediu para
+   * não publicar a foto dele. Basta apontar para um arquivo (ex.: "/images/leonardo.jpg")
+   * caso ele mude de ideia, que o retrato passa a aparecer na seção de autoridade.
+   */
+  photo: "",
+  experience: "Mais de 5 anos dedicados a orçamento de obras",
   education: [
     "Engenharia Civil — Universidade São Francisco",
     "Pós-graduação em Estruturas de Concreto e Metálica — Unicamp",

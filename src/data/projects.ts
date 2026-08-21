@@ -299,6 +299,41 @@ export const projects: Project[] = [
   },
 ];
 
+/**
+ * Entregáveis por tipo de escopo contratado. Derivar daqui, em vez de escrever
+ * projeto a projeto, mantém a descrição fiel ao serviço que foi de fato prestado.
+ */
+const DELIVERABLES: Record<string, string[]> = {
+  "Orçamento analítico": [
+    "Planilha analítica com composições",
+    "Memória de cálculo aberta",
+    "Resumo gerencial por etapa",
+    "Curva de desembolso",
+  ],
+  "Quantitativos e levantamento": [
+    "Levantamento de quantitativos",
+    "Memória de cálculo aberta",
+    "Planilha organizada por etapa",
+  ],
+};
+
+export function deliverablesOf(p: Project): string[] {
+  return DELIVERABLES[p.scope] ?? DELIVERABLES["Orçamento analítico"]!;
+}
+
+/**
+ * Uma obra por categoria, para a home mostrar a amplitude de atuação em vez de
+ * quatro projetos do mesmo tipo. Prioriza os marcados como `featured`.
+ */
+export function oneProjectPerCategory(): Project[] {
+  return usedCategories()
+    .map((c) => {
+      const doCategory = projects.filter((p) => p.category === c);
+      return doCategory.find((p) => p.featured) ?? doCategory[0];
+    })
+    .filter((p): p is Project => p !== undefined);
+}
+
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }

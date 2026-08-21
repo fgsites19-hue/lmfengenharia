@@ -44,7 +44,7 @@ export function Header() {
             to="/contato"
             className="border border-foreground bg-foreground px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background transition-colors hover:bg-transparent hover:text-foreground"
           >
-            Solicitar orçamento
+            Receber avaliação
           </Link>
         </nav>
 
@@ -76,7 +76,7 @@ export function Header() {
               onClick={() => setOpen(false)}
               className="mt-3 bg-foreground px-4 py-3 text-center text-xs font-semibold uppercase tracking-widest text-background"
             >
-              Solicitar orçamento
+              Receber avaliação
             </Link>
           </div>
         </div>

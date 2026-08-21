@@ -30,10 +30,8 @@ export function DeliverablePreview() {
               Não é um número solto. É um documento que você usa.
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:mt-6">
-              A entrega é uma planilha analítica editável, com cada serviço aberto em composição
-              própria, o resumo por etapa e a curva de desembolso mês a mês. Você consegue rastrear
-              qualquer valor até a prancha do projeto e levar o documento inteiro para a mesa de
-              negociação.
+              Planilha analítica editável, com cada serviço aberto em composição própria e a curva
+              de desembolso mês a mês. Todo valor é rastreável até a prancha do projeto.
             </p>
 
             <ul className="mt-8 grid gap-px border border-border bg-border sm:mt-10">

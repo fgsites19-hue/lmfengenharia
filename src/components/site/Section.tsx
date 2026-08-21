@@ -32,7 +32,7 @@ export function CtaBand({
             rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center bg-accent px-7 py-4 sm:w-auto text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
           >
-            Solicitar orçamento
+            Receber avaliação inicial
           </a>
         </div>
       </div>

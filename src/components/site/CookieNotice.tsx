@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "lmf-cookie-notice";
 
-export function CookieNotice() {
+export function CookieNotice({
+  onVisibilityChange,
+}: {
+  /** Avisa o componente pai para que o botão do WhatsApp não fique coberto. */
+  onVisibilityChange?: (visible: boolean) => void;
+}) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -16,6 +21,10 @@ export function CookieNotice() {
     }
     return;
   }, []);
+
+  useEffect(() => {
+    onVisibilityChange?.(visible);
+  }, [visible, onVisibilityChange]);
 
   function accept() {
     try {

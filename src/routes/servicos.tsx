@@ -91,6 +91,34 @@ const services = [
   },
 ];
 
+/** Os quatro escopos, na ordem da fase do projeto em que fazem sentido. */
+const scopeLevels = [
+  {
+    escopo: "Estimativa preliminar",
+    quando: "Ainda decidindo se a obra fecha",
+    envia: "Área e padrão pretendido",
+    recebe: "Faixa de custo para viabilidade",
+  },
+  {
+    escopo: "Orçamento analítico",
+    quando: "Projeto pronto, antes de contratar",
+    envia: "Projeto e memorial descritivo",
+    recebe: "Planilha com composições e curva S",
+  },
+  {
+    escopo: "Revisão e auditoria",
+    quando: "Já tem proposta de construtora",
+    envia: "Orçamento recebido de terceiros",
+    recebe: "Parecer técnico e pontos de risco",
+  },
+  {
+    escopo: "Controle na execução",
+    quando: "Obra em andamento",
+    envia: "Medições e notas do período",
+    recebe: "Previsto x realizado por etapa",
+  },
+];
+
 function ServicosPage() {
   return (
     <>
@@ -129,9 +157,52 @@ function ServicosPage() {
         </div>
       </section>
 
+      <section className="border-t border-border bg-secondary">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+          <SectionLabel>Qual escopo é o seu</SectionLabel>
+          <h2 className="mt-5 max-w-2xl text-2xl leading-tight sm:mt-6 sm:text-3xl md:text-4xl">
+            Depende da fase em que o seu projeto está.
+          </h2>
+
+          <div className="mt-10 overflow-x-auto sm:mt-12">
+            <table className="w-full min-w-[42rem] border-collapse text-left">
+              <caption className="sr-only">
+                Comparação entre os escopos de trabalho da LMF Engenharia
+              </caption>
+              <thead>
+                <tr className="border-b border-foreground/80">
+                  {["Escopo", "Quando usar", "Você envia", "Você recebe"].map((h) => (
+                    <th key={h} scope="col" className="label-mono py-4 pr-6 text-muted-foreground">
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {scopeLevels.map((l) => (
+                  <tr key={l.escopo} className="border-b border-border align-top">
+                    <th scope="row" className="py-5 pr-6 font-display text-base font-normal">
+                      {l.escopo}
+                    </th>
+                    <td className="py-5 pr-6 text-sm text-muted-foreground">{l.quando}</td>
+                    <td className="py-5 pr-6 text-sm text-muted-foreground">{l.envia}</td>
+                    <td className="py-5 text-sm text-muted-foreground">{l.recebe}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-6 text-xs text-muted-foreground">
+            Na dúvida, mande o que você já tem. A primeira avaliação indica o escopo adequado, sem
+            custo e sem compromisso.
+          </p>
+        </div>
+      </section>
+
       <CtaBand
-        title="Não sabe qual serviço se aplica ao seu momento?"
-        text="Descreva a fase do projeto e o objetivo. Indicamos o escopo adequado — mesmo que seja menor do que você imaginava."
+        title="Não sabe qual escopo se aplica ao seu momento?"
+        text="Descreva a fase do projeto. Indicamos o escopo adequado, mesmo que seja menor do que você imaginava."
       />
     </>
   );

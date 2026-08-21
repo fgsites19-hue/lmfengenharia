@@ -77,7 +77,7 @@ export function Footer() {
 
       <div className="border-t border-ink-foreground/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 sm:px-6 text-xs text-ink-foreground/45 md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} LMF Engenharia. Todos os direitos reservados.</span>
+          <span>{`© ${new Date().getFullYear()} LMF Engenharia. Todos os direitos reservados.`}</span>
           <span className="label-mono">Orçamento · Custos · Previsibilidade</span>
         </div>
       </div>

@@ -7,9 +7,10 @@ import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { DeliverablePreview } from "@/components/site/DeliverablePreview";
 import { RESPONSIBLE, SITE_URL, whatsappLink } from "@/lib/site";
-import { projects, coverOf, portfolioStats } from "@/data/projects";
+import { coverOf, portfolioStats, oneProjectPerCategory } from "@/data/projects";
 
 const stats = portfolioStats();
+const homeProjects = oneProjectPerCategory();
 
 const faq = [
   [
@@ -35,19 +36,19 @@ const faq = [
   [
     "Como é calculado o valor da consultoria?",
     // TROCAR: confirme com o Leonardo como ele precifica (por m², por complexidade, valor fixo por faixa) para deixar esta resposta específica.
-    "O valor depende do porte da obra, da tipologia e do nível de detalhe necessário. Analisamos o material do seu projeto e apresentamos o escopo e o valor antes de qualquer compromisso, sem custo para essa avaliação inicial.",
+    "Depende do porte, da tipologia e do nível de detalhe. A avaliação inicial é sem custo: analisamos o material e apresentamos escopo e valor antes de qualquer compromisso.",
   ],
   [
     "Quais arquivos preciso enviar?",
-    "O ideal é o projeto arquitetônico e os projetos complementares que já existirem, junto com o memorial descritivo. Se você tem só a planta, ou só a área estimada, também conseguimos começar e indicamos o que falta.",
+    "O ideal é o projeto arquitetônico, os complementares que já existirem e o memorial descritivo. Com só a planta, ou só a área estimada, também começamos e indicamos o que falta.",
   ],
   [
     "Vocês emitem ART?",
-    "Sim, com ART emitida quando o escopo contratado exige, sob responsabilidade de engenheiro civil registrado no CREA.",
+    "Sim, quando o escopo contratado exige, sob responsabilidade de engenheiro civil registrado no CREA.",
   ],
   [
     "O orçamento serve para negociar com a construtora?",
-    "É exatamente para isso que ele existe. Com a planilha analítica em mãos você compara propostas item a item, identifica omissões e sobrepreços, e negocia com base em número próprio, não no número de quem vai executar.",
+    "É para isso que ele existe. Com a planilha em mãos você compara propostas item a item, identifica omissões e sobrepreços, e negocia com número próprio.",
   ],
 ];
 
@@ -131,9 +132,8 @@ function Home() {
             Precisa do custo real da sua obra.
           </h1>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-foreground/70 sm:mt-7 sm:text-base">
-            Consultoria independente em custos de construção. Transformamos projetos em orçamentos
-            analíticos rastreáveis, com memória de cálculo aberta e o rigor necessário para
-            sustentar cada decisão de investimento.
+            Consultoria independente em custos de construção. Seu projeto vira uma planilha
+            rastreável, com memória de cálculo aberta, para você decidir com número próprio.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
@@ -143,7 +143,7 @@ function Home() {
               onClick={() => trackWhatsAppClick("hero")}
               className="group inline-flex items-center justify-center gap-3 bg-accent px-7 py-4 text-center text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
             >
-              Analisar minha obra
+              Receber avaliação inicial
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </a>
             <Link
@@ -158,8 +158,8 @@ function Home() {
             {[
               [`+${stats.totalAreaThousands} mil`, "m² orçados em projeto"],
               [`${stats.projectCount}`, "obras no portfólio"],
+              ["5+", "anos dedicados a orçamento"],
               ["100%", "memória de cálculo aberta"],
-              ["Zero", "obras executadas por nós"],
             ].map(([v, k]) => (
               <div key={k} className="bg-ink p-4 sm:p-5">
                 <dt className="font-display text-xl sm:text-2xl">
@@ -283,7 +283,7 @@ function Home() {
           </div>
 
           <div className="mt-10 grid gap-6 sm:mt-14 sm:gap-8 md:grid-cols-2">
-            {projects.slice(0, 4).map((p, i) => (
+            {homeProjects.map((p, i) => (
               <Reveal key={p.slug} delay={i * 90}>
                 <Link to="/projetos/$slug" params={{ slug: p.slug }} className="group block">
                   <div className="relative overflow-hidden border border-border">
@@ -327,7 +327,7 @@ function Home() {
               onClick={() => trackWhatsAppClick("portfolio")}
               className="group inline-flex shrink-0 items-center gap-2 bg-accent px-6 py-3.5 text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
             >
-              Analisar minha obra
+              Receber avaliação inicial
               <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
             </a>
           </div>
@@ -343,21 +343,38 @@ function Home() {
               Independência técnica é o nosso produto.
             </h2>
             <p className="mt-6 text-muted-foreground">
-              Não vendemos material, não executamos obra e não intermediamos fornecedor. Essa
-              distância é deliberada: ela é o que permite entregar um número imparcial, auditável e
-              sustentado por método — o mesmo número que você levará para a mesa de negociação com
-              total segurança.
+              Não vendemos material, não executamos obra e não indicamos fornecedor. Essa distância
+              é deliberada: é ela que torna o número imparcial e auditável.
             </p>
 
-            <div className="mt-8 border-l-2 border-accent pl-5 sm:mt-10 sm:pl-6">
-              <p className="label-mono text-muted-foreground">Responsável técnico</p>
-              <p className="mt-2 font-display text-lg sm:text-xl">{RESPONSIBLE.name}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{RESPONSIBLE.role}</p>
-              {RESPONSIBLE.crea && (
-                <p className="label-mono mt-2 text-accent">CREA {RESPONSIBLE.crea}</p>
-              )}
-              <ul className="mt-4 space-y-1.5">
-                {RESPONSIBLE.education.map((item) => (
+            <div className="mt-8 border border-border bg-secondary p-5 sm:mt-10 sm:p-6">
+              <div className="flex items-start gap-4">
+                {RESPONSIBLE.photo && (
+                  <img
+                    src={RESPONSIBLE.photo}
+                    alt={`${RESPONSIBLE.name}, ${RESPONSIBLE.role} da LMF Engenharia`}
+                    width={72}
+                    height={72}
+                    loading="lazy"
+                    decoding="async"
+                    className="size-16 shrink-0 object-cover sm:size-18"
+                  />
+                )}
+                <div className="min-w-0">
+                  <p className="label-mono text-muted-foreground">Responsável técnico</p>
+                  <p className="mt-2 font-display text-lg sm:text-xl">{RESPONSIBLE.name}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{RESPONSIBLE.role}</p>
+                  {RESPONSIBLE.crea && (
+                    <p className="label-mono mt-2 text-accent">
+                      CREA {RESPONSIBLE.crea}
+                      {RESPONSIBLE.creaUf && `/${RESPONSIBLE.creaUf}`}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <ul className="mt-5 space-y-1.5 border-t border-border pt-5">
+                {[RESPONSIBLE.experience, ...RESPONSIBLE.education].map((item) => (
                   <li key={item} className="flex gap-2.5 text-sm text-muted-foreground">
                     <span className="mt-2 size-1 shrink-0 bg-accent" aria-hidden="true" />
                     {item}

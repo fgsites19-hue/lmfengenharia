@@ -5,7 +5,7 @@ import { CtaBand, SectionLabel } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { Lightbox } from "@/components/site/Lightbox";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
-import { getProject, coverOf, neighborsOf } from "@/data/projects";
+import { getProject, coverOf, neighborsOf, deliverablesOf } from "@/data/projects";
 
 export const Route = createFileRoute("/projetos/$slug")({
   loader: ({ params }) => {
@@ -107,18 +107,38 @@ function ProjetoPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-        <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-10">
-          <p className="text-sm leading-relaxed text-muted-foreground">{p.text}</p>
-          <dl className="grid grid-cols-2 gap-px self-start border border-border bg-border">
-            {p.meta.map((m) => (
-              <dd key={m} className="label-mono bg-background p-4 text-foreground/70 sm:p-5">
-                {m}
-              </dd>
-            ))}
-            <dd className="label-mono col-span-2 bg-background p-4 text-foreground/70 sm:p-5">
-              {p.scope}
-            </dd>
-          </dl>
+        <div className="grid gap-10 md:grid-cols-3 md:gap-12">
+          <div>
+            <h2 className="label-mono text-accent">Contexto</h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+          </div>
+
+          <div>
+            <h2 className="label-mono text-accent">Escopo da LMF</h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.scope}</p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {p.meta.map((m) => (
+                <li
+                  key={m}
+                  className="label-mono border border-border px-3 py-1.5 text-foreground/70"
+                >
+                  {m}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="label-mono text-accent">Entregáveis</h2>
+            <ul className="mt-4 space-y-2.5">
+              {deliverablesOf(p).map((d) => (
+                <li key={d} className="flex gap-2.5 text-sm text-muted-foreground">
+                  <span className="mt-2 size-1 shrink-0 bg-accent" aria-hidden="true" />
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="mt-10 grid gap-6 sm:mt-14 sm:gap-8 md:grid-cols-2">

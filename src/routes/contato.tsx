@@ -43,8 +43,12 @@ export const Route = createFileRoute("/contato")({
 const fieldClass =
   "mt-2 w-full border border-input bg-background px-4 py-3 text-base outline-none transition-colors focus:border-accent sm:text-sm";
 
+type FormStatus = "idle" | "sending" | "sent" | "error";
+
 function ContatoPage() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [lastMessage, setLastMessage] = useState("");
+  const sent = status === "sent";
 
   return (
     <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-[1fr_1.1fr] md:gap-16">
@@ -83,17 +87,34 @@ function ContatoPage() {
 
       <div className="border border-border bg-card p-6 sm:p-8 md:p-10">
         {sent ? (
-          <div className="py-16 text-center">
-            <p className="label-mono text-accent">Quase lá</p>
-            <h2 className="mt-4 text-2xl">Abrimos o WhatsApp para você.</h2>
+          <div className="py-12 text-center" role="status" aria-live="polite">
+            <p className="label-mono text-accent">Próximo passo</p>
+            <h2 className="mt-4 text-2xl">Abrimos o WhatsApp com seus dados.</h2>
             <p className="mt-3 text-sm text-muted-foreground">
-              Confira a mensagem preenchida e envie por lá para concluir a solicitação.
+              Confira a mensagem e toque em enviar. Se a janela não abriu, use o botão abaixo.
             </p>
+            <a
+              href={whatsappLink(lastMessage)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block bg-accent px-6 py-3.5 text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
+            >
+              Abrir WhatsApp
+            </a>
+            <button
+              type="button"
+              onClick={() => setStatus("idle")}
+              className="mt-4 block w-full text-xs text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+            >
+              Enviar outra solicitação
+            </button>
           </div>
         ) : (
           <form
+            noValidate={false}
             onSubmit={(e) => {
               e.preventDefault();
+              setStatus("sending");
               const data = new FormData(e.currentTarget);
               const nome = String(data.get("nome") ?? "");
               const email = String(data.get("email") ?? "");
@@ -122,8 +143,13 @@ function ContatoPage() {
                 msg && `Sobre o projeto: ${msg}`,
               ].filter(Boolean);
 
-              window.open(whatsappLink(lines.join("\n")), "_blank", "noopener,noreferrer");
-              setSent(true);
+              const message = lines.join("\n");
+              setLastMessage(message);
+
+              // O bloqueador de pop-up pode impedir a abertura: nesse caso mostramos
+              // o estado de erro, com o link direto para o usuário concluir na mão.
+              const win = window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
+              setStatus(win ? "sent" : "error");
             }}
             className="space-y-6"
           >
@@ -215,14 +241,34 @@ function ContatoPage() {
                 className={fieldClass}
               />
             </div>
+            {status === "error" && (
+              <p
+                role="alert"
+                className="border-l-2 border-accent bg-secondary p-4 text-sm text-foreground"
+              >
+                Não conseguimos abrir o WhatsApp automaticamente, provavelmente por um bloqueador de
+                pop-up.{" "}
+                <a
+                  href={whatsappLink(lastMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold underline underline-offset-4"
+                >
+                  Abrir manualmente
+                </a>
+                .
+              </p>
+            )}
             <button
               type="submit"
-              className="w-full bg-foreground px-6 py-4 text-xs font-semibold uppercase tracking-widest text-background transition-opacity hover:opacity-90"
+              disabled={status === "sending"}
+              className="w-full bg-foreground px-6 py-4 text-xs font-semibold uppercase tracking-widest text-background transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Enviar solicitação
+              {status === "sending" ? "Abrindo WhatsApp…" : "Receber avaliação inicial"}
             </button>
             <p className="text-xs text-muted-foreground">
-              Suas informações são usadas apenas para elaborar a proposta de orçamento.
+              Seus dados são usados apenas para preparar a avaliação. Você revisa a mensagem antes
+              de enviar.
             </p>
           </form>
         )}

@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -175,6 +175,9 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  // Compartilhado entre os dois flutuantes: enquanto o aviso está na tela, o
+  // botão do WhatsApp sobe para não ficar escondido atrás dele.
+  const [noticeVisible, setNoticeVisible] = useState(false);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -185,8 +188,8 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
-        <WhatsAppButton />
-        <CookieNotice />
+        <WhatsAppButton raised={noticeVisible} />
+        <CookieNotice onVisibilityChange={setNoticeVisible} />
       </div>
     </QueryClientProvider>
   );
